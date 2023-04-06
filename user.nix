@@ -142,6 +142,8 @@ in {
           coc-pyright # coc for python
           coc-rust-analyzer # coc for rust
           coc-clangd # coc for C
+
+          pkgs.vimPlugins.ChatGPT-nvim # chatgpt
         ];
       };
     };
