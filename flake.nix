@@ -2,8 +2,9 @@
   inputs.nixpkgs.url = "github:nixos/nixpkgs";
   inputs.nixos-wsl.url = "github:nix-community/NixOS-WSL";
   inputs.home-manager.url = "github:nix-community/home-manager";
+  inputs.agenix.url = "github:ryantm/agenix";
 
-  outputs = { nixpkgs, self, ... }@flake-inputs: {
+  outputs = { nixpkgs, ... }@flake-inputs: {
     overlays.default = import ./overlay.nix;
     nixosConfigurations.kaguya = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

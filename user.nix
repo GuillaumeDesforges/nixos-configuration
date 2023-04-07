@@ -6,6 +6,7 @@ let
 in {
   imports = [
     flake-inputs.home-manager.nixosModules.home-manager
+    flake-inputs.agenix.nixosModules.default
   ];
 
   options.gdforj.user = {
@@ -33,6 +34,10 @@ in {
         zip
         unzip
         tree
+        tmux
+
+        # agenix CLI tool
+        flake-inputs.agenix.packages.x86_64-linux.default
 
         # Company tools
         tmate
