@@ -6,7 +6,7 @@ let
 in {
   imports = [
     flake-inputs.home-manager.nixosModules.home-manager
-    flake-inputs.agenix.nixosModules.default
+    ./secrets.nix
   ];
 
   options.gdforj.user = {
@@ -61,28 +61,6 @@ in {
         yarn
       ];
 
-      programs.git = {
-        enable = true;
-        lfs.enable = true;
-  
-        userEmail = "guillaume.desforges.pro@gmail.com";
-        userName = "Guillaume Desforges";
-  
-        extraConfig = {
-          core = {
-            editor = "vim";
-          };
-          pull = {
-            ff = "only";
-          };
-        };
-  
-        aliases = {
-          prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='\''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'\'' refs/heads); do git branch -D $b; done";
-          graph = "log --graph --all --oneline";
-        };
-      };
-  
       programs.bash = {
         enable = true;
         bashrcExtra = ''
@@ -93,6 +71,8 @@ in {
         initExtra = ''
           # set prompt
           export PS1="\u@\h:\W\$ "
+          # required by ChatGPT.nvim
+          export OPENAI_API_KEY="$(cat ${config.age.secrets.openai_key.path})"
         '';
       };
 
@@ -135,6 +115,8 @@ in {
         extraLuaConfig = builtins.readFile ./nvim/init.lua;
 
         plugins = with pkgs.vimPlugins; [
+          vim-code-dark # dark color scheme
+
           sleuth # smart indent size for each buffer
 
           nvim-web-devicons # requirement for feline
@@ -148,8 +130,37 @@ in {
           coc-rust-analyzer # coc for rust
           coc-clangd # coc for C
 
-          pkgs.vimPlugins.ChatGPT-nvim # chatgpt
+          ChatGPT-nvim # chatgpt
+          nui-nvim
+          plenary-nvim
+          telescope-nvim
         ];
+      };
+
+      programs.git = {
+        enable = true;
+        lfs.enable = true;
+  
+        userEmail = "guillaume.desforges.pro@gmail.com";
+        userName = "Guillaume Desforges";
+  
+        extraConfig = {
+          core = {
+            editor = "vim";
+          };
+          pull = {
+            ff = "only";
+          };
+        };
+  
+        aliases = {
+          prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='\''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'\'' refs/heads); do git branch -D $b; done";
+          graph = "log --graph --all --oneline";
+        };
+      };
+  
+      home.sessionVariables = {
+        EDITOR = "vim";
       };
     };
   };

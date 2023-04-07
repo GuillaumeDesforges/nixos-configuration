@@ -1,3 +1,8 @@
+-- theming
+vim.cmd [[
+    colorscheme codedark
+]]
+
 -- number/sign columns
 vim.opt.relativenumber = true
 -- Always show the signcolumn, otherwise it would shift the text each time diagnostics appeared/became resolved
@@ -19,6 +24,12 @@ require'nvim-web-devicons'.setup{
     strict = true;
 }
 require('feline').setup()
+
+-- ChatGPT.nvim
+require("chatgpt").setup()
+
+-- AND NOW
+-- THE WHOLE COC CONFIGURATION!
 
 -- Some servers have issues with backup files, see #649
 vim.opt.backup = false
