@@ -3,6 +3,9 @@ vim.cmd [[
     colorscheme codedark
 ]]
 
+-- disable mouse
+vim.opt.mouse = ""
+
 -- number/sign columns
 vim.opt.relativenumber = true
 -- Always show the signcolumn, otherwise it would shift the text each time diagnostics appeared/became resolved
