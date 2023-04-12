@@ -124,11 +124,14 @@ in {
           
           vim-nix # nix syntax highlighting
           vim-nickel # nickel syntax highlighting
+          vim-terraform # terraform syntax highlighting
           
           coc-tsserver # coc for TS/JS
           coc-pyright # coc for python
           coc-rust-analyzer # coc for rust
           coc-clangd # coc for C
+
+          vim-terraform-completion # terraform autocomplete
 
           ChatGPT-nvim # chatgpt
           nui-nvim
