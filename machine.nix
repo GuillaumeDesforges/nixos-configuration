@@ -32,6 +32,7 @@ in {
       package = pkgs.nixUnstable;
       settings = {
         experimental-features = ["nix-command" "flakes"];
+        bash-prompt-prefix = "[] ";
       };
     };
     nixpkgs.config = {
