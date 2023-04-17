@@ -3,7 +3,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.gdforj.user;
-in {
+in
+{
   imports = [
     flake-inputs.home-manager.nixosModules.home-manager
     ./secrets.nix
@@ -19,13 +20,15 @@ in {
       initialHashedPassword = "IBEH7HSCOsr4Y";
       extraGroups = [ "wheel" "docker" ];
     };
-    
+
     home-manager.users.gdforj = { pkgs, ... }: {
       home.stateVersion = "22.11";
       programs.home-manager.enable = true;
 
+      nixpkgs.config.allowUnfree = true;
+
       fonts.fontconfig.enable = true;
-      
+
       home.packages = with pkgs; [
         # Common
         gnumake
@@ -59,6 +62,10 @@ in {
 
         # JS/TS
         yarn
+      ]
+      # Desktop applications
+      ++ pkgs.lib.optionals config.gdforj.desktop.enable [
+        google-chrome
       ];
 
       programs.bash = {
@@ -121,11 +128,11 @@ in {
 
           nvim-web-devicons # requirement for feline
           feline-nvim # status bar
-          
+
           vim-nix # nix syntax highlighting
           vim-nickel # nickel syntax highlighting
           vim-terraform # terraform syntax highlighting
-          
+
           coc-tsserver # coc for TS/JS
           coc-pyright # coc for python
           coc-rust-analyzer # coc for rust
@@ -143,10 +150,10 @@ in {
       programs.git = {
         enable = true;
         lfs.enable = true;
-  
+
         userEmail = "guillaume.desforges.pro@gmail.com";
         userName = "Guillaume Desforges";
-  
+
         extraConfig = {
           core = {
             editor = "vim";
@@ -155,13 +162,13 @@ in {
             ff = "only";
           };
         };
-  
+
         aliases = {
           prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='\''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'\'' refs/heads); do git branch -D $b; done";
           graph = "log --graph --all --oneline";
         };
       };
-  
+
       home.sessionVariables = {
         EDITOR = "vim";
       };
