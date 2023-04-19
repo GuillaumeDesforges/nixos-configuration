@@ -119,7 +119,12 @@ in
             rust-analyzer.server.path = "${pkgs.rust-analyzer}/bin/rust-analyzer";
           };
 
-        extraLuaConfig = builtins.readFile ./nvim/init.lua;
+        extraLuaConfig =
+          builtins.readFile ./nvim/init.lua
+          + (if config.gdforj.desktop.enable then ''
+            -- configure clipboard
+            vim.opt.clipboard = 'unnamedplus'
+          '' else "");
 
         plugins = with pkgs.vimPlugins; [
           vim-code-dark # dark color scheme
