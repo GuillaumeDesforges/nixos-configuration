@@ -65,7 +65,17 @@ in
       ]
       # Desktop applications
       ++ pkgs.lib.optionals config.gdforj.desktop.enable [
+        # fonts, to be used in terminal emulators
+        (nerdfonts.override { fonts = [ "Hack" ]; })
+
+        # Web
         google-chrome
+
+        # Social
+        slack
+
+        # Office
+        libreoffice
       ];
 
       programs.bash = {
