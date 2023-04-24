@@ -35,6 +35,8 @@
             enable = true;
             desktop.enable = true;
           };
+          console.keyMap = "fr";
+          services.xserver.layout = "fr";
         }
       );
       nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux" (
@@ -44,6 +46,8 @@
             enable = true;
             desktop.enable = true;
           };
+          console.keyMap = "uk";
+          services.xserver.layout = "gb";
         }
       );
     };

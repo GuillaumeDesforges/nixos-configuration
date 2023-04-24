@@ -1,6 +1,6 @@
 { lib, config, flake-inputs, pkgs, ... }:
 let
-  inherit (lib) mkEnableOption mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.gdforj;
 in
 {

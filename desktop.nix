@@ -1,6 +1,10 @@
 { lib, config, flake-inputs, pkgs, ... }:
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types;
   cfg = config.gdforj.desktop;
 in
 {
@@ -8,6 +12,10 @@ in
 
   options.gdforj.desktop = {
     enable = mkEnableOption "Enable if system is a desktop";
+    keyboard = mkOption {
+      type = types.str;
+      description = "Keyboard layout";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -31,9 +39,6 @@ in
       LC_TELEPHONE = "fr_FR.UTF-8";
       LC_TIME = "fr_FR.UTF-8";
     };
-
-    # Configure console keymap
-    console.keyMap = "fr";
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
@@ -59,12 +64,6 @@ in
     # Enable the KDE Plasma Desktop Environment.
     services.xserver.displayManager.sddm.enable = true;
     services.xserver.desktopManager.plasma5.enable = true;
-
-    # Configure keymap in X11
-    services.xserver = {
-      layout = "fr";
-      xkbVariant = "";
-    };
 
     # Enable automatic login for the user
     services.xserver.displayManager.autoLogin.enable = true;
