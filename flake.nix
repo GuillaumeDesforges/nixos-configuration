@@ -37,5 +37,14 @@
           };
         }
       );
+      nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux" (
+        { ... }: {
+          imports = [ ./hardwares/yor.nix ];
+          gdforj = {
+            enable = true;
+            desktop.enable = true;
+          };
+        }
+      );
     };
 }
