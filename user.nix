@@ -60,6 +60,9 @@ in
         kubectl
         kubernetes-helm
 
+        # Python
+        poetry
+
         # JS/TS
         yarn
       ]
