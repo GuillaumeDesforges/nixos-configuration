@@ -30,13 +30,14 @@ in
       fonts.fontconfig.enable = true;
 
       home.packages = with pkgs; [
-        # Common
+        # Common utils
         gnumake
         file
         wget
         zip
         unzip
         tree
+        htop
         tmux
 
         # agenix CLI tool
