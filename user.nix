@@ -30,24 +30,28 @@ in
       fonts.fontconfig.enable = true;
 
       home.packages = with pkgs; [
-        # Common utils
-        gnumake
+        # common sysadmin
         file
         wget
-        zip
-        unzip
-        tree
+        zip unzip
         htop
+
+        # common user tools
+        tree
         tmux
 
         # agenix CLI tool
         flake-inputs.agenix.packages.x86_64-linux.default
 
-        # Company tools
+        # company tools
         tmate
 
-        # Nix
+        # common build tools
+        gnumake
+
+        # Nix utils
         nixpkgs-fmt
+        nixpkgs-review
 
         # data processing
         jq
@@ -80,6 +84,9 @@ in
 
         # Office
         libreoffice
+
+        # Audio
+        audacity
       ];
 
       programs.bash = {
