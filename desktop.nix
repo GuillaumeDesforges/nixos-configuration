@@ -73,6 +73,9 @@ in
     environment.systemPackages = with pkgs; [
       xclip
     ];
+    
+    # Install desktop apps by default
+    gdforj.user.desktop-apps.enable = true;
   };
 }
 

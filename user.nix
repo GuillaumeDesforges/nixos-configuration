@@ -12,6 +12,9 @@ in
 
   options.gdforj.user = {
     enable = mkEnableOption "gdforj user";
+    desktop-apps = {
+      enable = mkEnableOption "install desktop apps";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -72,21 +75,29 @@ in
         yarn
       ]
       # Desktop applications
-      ++ pkgs.lib.optionals config.gdforj.desktop.enable [
+      ++ pkgs.lib.optionals config.gdforj.user.desktop-apps.enable [
         # fonts, to be used in terminal emulators
         (nerdfonts.override { fonts = [ "Hack" ]; })
 
-        # Web
+        # web
         google-chrome
 
-        # Social
+        # social
         slack
+        element-desktop
 
-        # Office
+        # office
         libreoffice
 
-        # Audio
+        # multimedia
         audacity
+        vlc
+        gimp
+        (wrapOBS { plugins = [ obs-studio-plugins.obs-backgroundremoval ]; })
+
+        # gaming & game dev
+        steam
+        godot_4
       ];
 
       programs.bash = {
