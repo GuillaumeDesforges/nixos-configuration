@@ -127,6 +127,7 @@ in
         coc.settings = pkgs.lib.recursiveUpdate
           (builtins.fromJSON ''
             {
+              "tsserver.useLocalTsdk": true,
               "python.formatting.provider": "black",
               "python.linting.flake8Enabled": true,
               "languageserver": {
