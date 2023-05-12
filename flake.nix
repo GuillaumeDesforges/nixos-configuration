@@ -50,5 +50,12 @@
           services.xserver.layout = "gb";
         }
       );
+      nixosConfigurations.nazuna = mkNixosSystem "nazuna" "x86_64-linux"
+        ({ ... }: {
+          gdforj = {
+            enable = true;
+            wsl.enable = true;
+          };
+        });
     };
 }
