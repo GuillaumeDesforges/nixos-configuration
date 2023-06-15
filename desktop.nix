@@ -52,6 +52,7 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      jack.enable = true;
     };
 
     # Enable the X11 windowing system.
@@ -68,14 +69,22 @@ in
     # Enable automatic login for the user
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = "gdforj";
-
-    # Clipboard utility, necessary for nvim
-    environment.systemPackages = with pkgs; [
-      xclip
-    ];
     
     # Install desktop apps by default
     gdforj.user.desktop-apps.enable = true;
+
+    # install Docker
+    virtualisation.docker.enable = true;
+    virtualisation.docker.enableNvidia = true;
+    hardware.opengl.driSupport32Bit = true;
+
+    # System packages for desktop
+    environment.systemPackages = with pkgs; [
+      # Clipboard utility, necessary for nvim
+      xclip
+      # Docker
+      pkgs.docker-compose
+    ];
   };
 }
 

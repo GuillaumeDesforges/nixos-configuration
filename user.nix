@@ -36,7 +36,8 @@ in
         # common sysadmin
         file
         wget
-        zip unzip
+        zip
+        unzip
         htop
 
         # common user tools
@@ -92,10 +93,14 @@ in
         libreoffice
 
         # multimedia
-        audacity
         vlc
         gimp
         (wrapOBS { plugins = [ obs-studio-plugins.obs-backgroundremoval ]; })
+
+        # music
+        alsa-utils
+        audacity
+        ardour
 
         # gaming & game dev
         steam
@@ -116,6 +121,7 @@ in
           export OPENAI_API_KEY="$(cat ${config.age.secrets.openai_key.path})"
         '';
       };
+      programs.fzf.enable = true;
 
       programs.neovim = {
         enable = true;
@@ -211,7 +217,9 @@ in
 
       home.sessionVariables = {
         EDITOR = "vim";
-      };
+      } // (if config.gdforj.user.desktop-apps.enable then {
+        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/";
+      } else { });
     };
   };
 }
