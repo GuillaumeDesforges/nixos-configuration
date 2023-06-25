@@ -1,3 +1,6 @@
+-- change leader key to spacebar
+vim.g.mapleader = "<Space>"
+
 -- theming
 vim.cmd [[
     colorscheme codedark
