@@ -101,6 +101,7 @@ in
         alsa-utils
         audacity
         ardour
+        distrho
 
         # gaming & game dev
         steam
@@ -218,7 +219,7 @@ in
       home.sessionVariables = {
         EDITOR = "vim";
       } // (if config.gdforj.user.desktop-apps.enable then {
-        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/";
+        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/";
       } else { });
     };
   };
