@@ -1,5 +1,5 @@
 -- change leader key to spacebar
-vim.g.mapleader = "<Space>"
+vim.g.mapleader = " "
 
 -- theming
 vim.cmd [[
