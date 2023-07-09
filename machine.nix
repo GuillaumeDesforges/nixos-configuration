@@ -18,8 +18,13 @@ in
     system.stateVersion = "23.05";
 
     nix = {
-      registry.nixpkgs.flake = flake-inputs.nixpkgs;
-      package = pkgs.nixUnstable;
+      registry.nixpkgs.from = { type = "indirect"; id = "nixpkgs"; };
+      registry.nixpkgs.to = {
+        type = "github";
+        owner = "nixos";
+        repo = "nixpkgs";
+        rev = flake-inputs.nixpkgs.sourceInfo.rev;
+      };
       settings = {
         experimental-features = [ "nix-command" "flakes" ];
         bash-prompt-prefix = "[] ";
