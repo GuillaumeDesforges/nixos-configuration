@@ -216,6 +216,10 @@ in
         };
       };
 
+      programs.vscode = {
+        enable = true;
+      };
+
       home.sessionVariables = {
         EDITOR = "vim";
       } // (if config.gdforj.user.desktop-apps.enable then {
