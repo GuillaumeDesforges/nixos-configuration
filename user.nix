@@ -220,6 +220,14 @@ in
         enable = true;
       };
 
+      programs.kitty = {
+        enable = true;
+        font = {
+          name = "Hack Nerd Font Mono";
+          size = 16;
+        };
+      };
+
       home.sessionVariables = {
         EDITOR = "vim";
       } // (if config.gdforj.user.desktop-apps.enable then {
