@@ -31,9 +31,6 @@ require'nvim-web-devicons'.setup{
 }
 require('feline').setup()
 
--- ChatGPT.nvim
-require("chatgpt").setup()
-
 -- AND NOW
 -- THE WHOLE COC CONFIGURATION!
 

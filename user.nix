@@ -188,11 +188,6 @@ in
           coc-clangd # coc for C
 
           vim-terraform-completion # terraform autocomplete
-
-          ChatGPT-nvim # chatgpt
-          nui-nvim
-          plenary-nvim
-          telescope-nvim
         ];
       };
 
