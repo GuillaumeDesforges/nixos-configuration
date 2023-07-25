@@ -119,7 +119,9 @@ in
           # set prompt
           export PS1="\u@\h:\W\$ "
           # required by ChatGPT.nvim
-          export OPENAI_API_KEY="$(cat ${config.age.secrets.openai_key.path})"
+          if [[ -f ${config.age.secrets.openai_key.path} ]]; then
+            export OPENAI_API_KEY="$(cat ${config.age.secrets.openai_key.path})"
+          fi
         '';
       };
       programs.fzf.enable = true;
