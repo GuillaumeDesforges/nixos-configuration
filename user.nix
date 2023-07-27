@@ -135,10 +135,10 @@ in
           '' else "");
 
         plugins = with pkgs.vimPlugins; [
-           vim-code-dark # dark color scheme
-           sleuth # smart indent size for each buffer
-           nvim-web-devicons # requirement for feline
-           feline-nvim # status bar
+          vim-code-dark # dark color scheme
+          sleuth # smart indent size for each buffer
+          nvim-web-devicons # requirement for feline
+          feline-nvim # status bar
         ];
       };
 
