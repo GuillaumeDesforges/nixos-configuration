@@ -12,9 +12,9 @@ in
 
   options.gdforj.user = {
     enable = mkEnableOption "gdforj user";
-    desktop-apps = {
-      enable = mkEnableOption "install desktop apps";
-    };
+    desktop-apps.enable = mkEnableOption "install desktop apps";
+    music-apps.enable = mkEnableOption "install music apps";
+    video-apps.enable = mkEnableOption "install video apps";
   };
 
   config = mkIf cfg.enable {
@@ -77,7 +77,7 @@ in
         # JS/TS
         yarn
       ]
-      # Desktop applications
+      # desktop
       ++ pkgs.lib.optionals config.gdforj.user.desktop-apps.enable [
         # fonts, to be used in terminal emulators
         (nerdfonts.override { fonts = [ "Hack" ]; })
@@ -95,18 +95,19 @@ in
         # multimedia
         vlc
         gimp
-        (wrapOBS { plugins = [ obs-studio-plugins.obs-backgroundremoval ]; })
-
-        # music
+      ]
+      # music
+      ++ pkgs.lib.optionals config.gdforj.user.music-apps.enable [
         alsa-utils
         audacity
         ardour
         distrho
-
-        # gaming & game dev
-        steam
-        godot_4
-      ];
+      ]
+      # streaming/recording
+      ++ pkgs.lib.optionals config.gdforj.user.video-apps.enable [
+        (wrapOBS { plugins = [ obs-studio-plugins.obs-backgroundremoval ]; })
+      ]
+      ;
 
       programs.bash = {
         enable = true;
@@ -118,76 +119,26 @@ in
         initExtra = ''
           # set prompt
           export PS1="\u@\h:\W\$ "
-          # required by ChatGPT.nvim
-          if [[ -f ${config.age.secrets.openai_key.path} ]]; then
-            export OPENAI_API_KEY="$(cat ${config.age.secrets.openai_key.path})"
-          fi
         '';
       };
       programs.fzf.enable = true;
 
       programs.neovim = {
         enable = true;
-
         vimAlias = true;
-        withNodeJs = true;
-
-        coc.enable = true;
-        coc.settings = pkgs.lib.recursiveUpdate
-          (builtins.fromJSON ''
-            {
-              "tsserver.useLocalTsdk": true,
-              "python.formatting.provider": "black",
-              "python.linting.flake8Enabled": true,
-              "languageserver": {
-                "nix": {
-                  "command": "rnix-lsp",
-                  "filetypes": ["nix"]
-                },
-                "terraform": {
-                  "command": "terraform-ls",
-                  "args": ["serve"],
-                  "filetypes": [
-                    "terraform",
-                    "tf"
-                  ],
-                  "initializationOptions": {},
-                  "settings": {}
-                }
-              }
-            }
-          '')
-          {
-            languageserver.nix.command = "${pkgs.rnix-lsp}/bin/rnix-lsp";
-            languageserver.terraform.command = "${pkgs.terraform-ls}/bin/terraform-ls";
-            rust-analyzer.server.path = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-          };
 
         extraLuaConfig =
           builtins.readFile ./nvim/init.lua
           + (if config.gdforj.desktop.enable then ''
-            -- configure clipboard
+            -- share vim clipboard with desktop
             vim.opt.clipboard = 'unnamedplus'
           '' else "");
 
         plugins = with pkgs.vimPlugins; [
-          vim-code-dark # dark color scheme
-
-          sleuth # smart indent size for each buffer
-
-          nvim-web-devicons # requirement for feline
-          feline-nvim # status bar
-
-          vim-nix # nix syntax highlighting
-          vim-nickel # nickel syntax highlighting
-          vim-terraform # terraform syntax highlighting
-
-          coc-tsserver # coc for TS/JS
-          coc-pyright # coc for python
-          coc-rust-analyzer # coc for rust
-          coc-clangd # coc for C
-
-          vim-terraform-completion # terraform autocomplete
+           vim-code-dark # dark color scheme
+           sleuth # smart indent size for each buffer
+           nvim-web-devicons # requirement for feline
+           feline-nvim # status bar
         ];
       };
 
@@ -213,11 +164,7 @@ in
         };
       };
 
-      programs.vscode = {
-        enable = true;
-      };
-
-      programs.kitty = {
+      programs.kitty = mkIf cfg.desktop-apps.enable {
         enable = true;
         font = {
           name = "Hack Nerd Font Mono";
@@ -227,7 +174,7 @@ in
 
       home.sessionVariables = {
         EDITOR = "vim";
-      } // (if config.gdforj.user.desktop-apps.enable then {
+      } // (if cfg.desktop-apps.enable then {
         LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/";
       } else { });
     };
