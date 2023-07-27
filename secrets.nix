@@ -10,7 +10,7 @@
   ];
 
   age.secrets = {
-    openai_key.file = ./secrets/openai_key.age;
-    openai_key.mode = "0644";
+    # secret.file = ./secrets/secret.age;
+    # secret.mode = "0644";
   };
 }
