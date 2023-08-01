@@ -95,6 +95,9 @@ in
         # multimedia
         vlc
         gimp
+
+        # dev
+        vscode-fhs
       ]
       # music
       ++ pkgs.lib.optionals config.gdforj.user.music-apps.enable [
