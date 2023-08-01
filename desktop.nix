@@ -12,10 +12,6 @@ in
 
   options.gdforj.desktop = {
     enable = mkEnableOption "Enable if system is a desktop";
-    keyboard = mkOption {
-      type = types.str;
-      description = "Keyboard layout";
-    };
   };
 
   config = mkIf cfg.enable {

@@ -35,8 +35,8 @@
         { ... }: {
           imports = [ ./hardwares/tosaka.nix ];
           gdforj.desktop.enable = true;
-          music-apps.enable = true;
-          video-apps.enable = true;
+          gdforj.user.music-apps.enable = true;
+          gdforj.user.video-apps.enable = true;
         }
       );
       nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux" (
