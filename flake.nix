@@ -40,12 +40,12 @@
         }
       );
       nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux" (
-        { ... }: {
+        { lib, ... }: {
           imports = [ ./hardwares/yor.nix ];
           gdforj.desktop.enable = true;
           # override keymap
-          console.keyMap = "uk";
-          services.xserver.layout = "gb";
+          console.keyMap = lib.mkForce "uk";
+          services.xserver.layout = lib.mkForce "gb";
         }
       );
     };
