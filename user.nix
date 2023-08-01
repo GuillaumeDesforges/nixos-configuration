@@ -78,7 +78,7 @@ in
         yarn
       ]
       # desktop
-      ++ pkgs.lib.optionals config.gdforj.user.desktop-apps.enable [
+      ++ pkgs.lib.optionals cfg.desktop-apps.enable [
         # fonts, to be used in terminal emulators
         (nerdfonts.override { fonts = [ "Hack" ]; })
 
@@ -100,14 +100,15 @@ in
         vscode-fhs
       ]
       # music
-      ++ pkgs.lib.optionals config.gdforj.user.music-apps.enable [
+      ++ pkgs.lib.optionals cfg.music-apps.enable [
         alsa-utils
         audacity
         ardour
         distrho
+        guitarix
       ]
       # streaming/recording
-      ++ pkgs.lib.optionals config.gdforj.user.video-apps.enable [
+      ++ pkgs.lib.optionals cfg.video-apps.enable [
         (wrapOBS { plugins = [ obs-studio-plugins.obs-backgroundremoval ]; })
       ]
       ;
@@ -177,8 +178,8 @@ in
 
       home.sessionVariables = {
         EDITOR = "vim";
-      } // (if cfg.desktop-apps.enable then {
-        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/";
+      } // (if cfg.music-apps.enable then {
+        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/";
       } else { });
     };
   };
