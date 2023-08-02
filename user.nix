@@ -131,12 +131,7 @@ in
         enable = true;
         vimAlias = true;
 
-        extraLuaConfig =
-          builtins.readFile ./nvim/init.lua
-          + (if config.gdforj.desktop.enable then ''
-            -- share vim clipboard with desktop
-            vim.opt.clipboard = 'unnamedplus'
-          '' else "");
+        # lua config is handled manually by copying the ./nvim folder to XDG configs
 
         plugins = with pkgs.vimPlugins; [
           # theme and display
@@ -148,6 +143,10 @@ in
           # pickers
           telescope-nvim # fuzzy finder # fuzzy finder
         ];
+      };
+      xdg.configFile.nvim = {  
+        source = ./nvim;  
+        recursive = true;  
       };
 
       programs.git = {
