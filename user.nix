@@ -139,10 +139,14 @@ in
           '' else "");
 
         plugins = with pkgs.vimPlugins; [
+          # theme and display
           vim-code-dark # dark color scheme
-          sleuth # smart indent size for each buffer
           nvim-web-devicons # requirement for feline
           feline-nvim # status bar
+          # typing and suggestions
+          sleuth # smart indent size for each buffer
+          # pickers
+          telescope-nvim # fuzzy finder # fuzzy finder
         ];
       };
 
