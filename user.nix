@@ -152,6 +152,8 @@ in
           telescope-nvim
           # configs for the Nvim LSP client
           nvim-lspconfig
+          # file explorer tree
+          nvim-tree-lua
         ];
       };
       xdg.configFile.nvim = {  

@@ -19,6 +19,7 @@ vim.opt.clipboard = 'unnamedplus'
 require("plugins/feline")
 require("plugins/telescope")
 require("plugins/nvim-lspconfig")
+require("plugins/nvim-tree-lua")
 
 -- load mapping
 require("mapping")
