@@ -124,6 +124,12 @@ in
           # set prompt
           export PS1="\u@\h:\W\$ "
         '';
+        shellAliases =
+          {}
+          // (mkIf cfg.desktop-apps.enable {
+            "google-chrome" = "google-chrome-stable";
+          })
+        ;
       };
       programs.fzf.enable = true;
 
@@ -134,14 +140,18 @@ in
         # lua config is handled manually by copying the ./nvim folder to XDG configs
 
         plugins = with pkgs.vimPlugins; [
-          # theme and display
-          vim-code-dark # dark color scheme
-          nvim-web-devicons # requirement for feline
-          feline-nvim # status bar
-          # typing and suggestions
-          sleuth # smart indent size for each buffer
-          # pickers
-          telescope-nvim # fuzzy finder # fuzzy finder
+          # dark color scheme
+          vim-code-dark
+          # requirement for feline
+          nvim-web-devicons
+          # status bar
+          feline-nvim
+          # smart indent size for each buffer
+          sleuth
+          # highly extendable fuzzy finder over lists
+          telescope-nvim
+          # configs for the Nvim LSP client
+          nvim-lspconfig
         ];
       };
       xdg.configFile.nvim = {  

@@ -1,3 +1,6 @@
+-- logs
+vim.lsp.set_log_level('debug')
+
 -- theming
 vim.cmd [[
     colorscheme codedark
@@ -15,6 +18,7 @@ vim.opt.clipboard = 'unnamedplus'
 -- load plugins
 require("plugins/feline")
 require("plugins/telescope")
+require("plugins/nvim-lspconfig")
 
 -- load mapping
 require("mapping")

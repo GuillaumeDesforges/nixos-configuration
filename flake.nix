@@ -26,10 +26,6 @@
         ({ ... }: {
           gdforj.wsl.enable = true;
         });
-      nixosConfigurations.nazuna = mkNixosSystem "nazuna" "x86_64-linux"
-        ({ ... }: {
-          gdforj.wsl.enable = true;
-        });
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem "tosaka" "x86_64-linux" (
         { ... }: {
@@ -46,6 +42,13 @@
           # override keymap
           console.keyMap = lib.mkForce "uk";
           services.xserver.layout = lib.mkForce "gb";
+        }
+      );
+      # laptop
+      nixosConfigurations.nazuna = mkNixosSystem "nazuna" "x86_64-linux" (
+        { ... }: {
+          imports = [ ./hardwares/nazuna.nix ];
+          gdforj.desktop.enable = true;
         }
       );
     };
