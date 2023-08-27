@@ -194,7 +194,7 @@ in
       home.sessionVariables = {
         EDITOR = "vim";
       } // (if cfg.music-apps.enable then {
-        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/";
+        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/:${pkgs.lsp-plugins}/lib/lv2/";
       } else { });
     };
   };
