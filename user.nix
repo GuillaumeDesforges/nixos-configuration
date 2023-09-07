@@ -137,7 +137,9 @@ in
         enable = true;
         vimAlias = true;
 
-        # lua config is handled manually by copying the ./nvim folder to XDG configs
+        # lua config is handled manually by linking files from
+        # https://github.com/GuillaumeDesforges/dotfiles
+        # manually to ~/.config/neovim
 
         plugins = with pkgs.vimPlugins; [
           # dark color scheme
@@ -155,10 +157,6 @@ in
           # file explorer tree
           nvim-tree-lua
         ];
-      };
-      xdg.configFile.nvim = {  
-        source = ./nvim;  
-        recursive = true;  
       };
 
       programs.git = {
