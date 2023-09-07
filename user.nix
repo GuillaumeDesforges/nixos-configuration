@@ -71,6 +71,9 @@ in
         kubectl
         kubernetes-helm
 
+        # SaaS
+        gh
+
         # Python
         poetry
 
