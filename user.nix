@@ -128,7 +128,9 @@ in
           export PS1="\u@\h:\W\$ "
         '';
         shellAliases =
-          {}
+          {
+            "tmpdir" = "cd $(mktemp -d)";
+          }
           // (mkIf cfg.desktop-apps.enable {
             "google-chrome" = "google-chrome-stable";
           })
