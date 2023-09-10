@@ -139,27 +139,18 @@ in
       programs.neovim = {
         enable = true;
         vimAlias = true;
+        # add programs needed for plugins
+        extraPackages = [
+          pkgs.gcc
+          pkgs.ripgrep
+          pkgs.lazygit
+          pkgs.nodejs_latest
+          pkgs.rust-analyzer
+        ];
 
         # lua config is handled manually by linking files from
         # https://github.com/GuillaumeDesforges/dotfiles
         # manually to ~/.config/neovim
-
-        plugins = with pkgs.vimPlugins; [
-          # dark color scheme
-          vim-code-dark
-          # requirement for feline
-          nvim-web-devicons
-          # status bar
-          feline-nvim
-          # smart indent size for each buffer
-          sleuth
-          # highly extendable fuzzy finder over lists
-          telescope-nvim
-          # configs for the Nvim LSP client
-          nvim-lspconfig
-          # file explorer tree
-          nvim-tree-lua
-        ];
       };
 
       programs.git = {
