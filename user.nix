@@ -101,6 +101,9 @@ in
 
         # dev
         vscode-fhs
+
+        # gaming
+        steam
       ]
       # music
       ++ pkgs.lib.optionals cfg.music-apps.enable [
