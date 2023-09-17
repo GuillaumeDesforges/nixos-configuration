@@ -147,11 +147,13 @@ in
         vimAlias = true;
         # add programs needed for plugins
         extraPackages = [
+          # needed to install things via mason
           pkgs.gcc
+          pkgs.cargo
+          pkgs.nodejs_latest
+          # needed for lazyvim
           pkgs.ripgrep
           pkgs.lazygit
-          pkgs.nodejs_latest
-          pkgs.rust-analyzer
         ];
 
         # lua config is handled manually by linking files from
