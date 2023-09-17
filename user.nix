@@ -110,6 +110,7 @@ in
         alsa-utils
         audacity
         ardour
+        bitwig-studio
         distrho
         guitarix
       ]
