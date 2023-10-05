@@ -49,6 +49,7 @@ in
 
         # company tools
         tmate
+	cloak
 
         # common build tools
         gnumake
