@@ -68,6 +68,7 @@ in
         # cloud
         azure-cli
         google-cloud-sdk
+        awscli2
         terraform
         kubectl
         kubernetes-helm
@@ -102,6 +103,7 @@ in
 
         # dev
         vscode-fhs
+        dbeaver
 
         # gaming
         steam
