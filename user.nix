@@ -20,8 +20,8 @@ in
   config = mkIf cfg.enable {
     users.users.gdforj = {
       isNormalUser = true;
-      initialHashedPassword = "IBEH7HSCOsr4Y";
       extraGroups = [ "wheel" "docker" ];
+      initialPassword = "password";
     };
 
     home-manager.users.gdforj = { pkgs, ... }: {
