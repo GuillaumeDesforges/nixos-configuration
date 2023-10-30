@@ -51,5 +51,15 @@
           gdforj.desktop.enable = true;
         }
       );
+      # laptops
+      nixosConfigurations.chizuru = mkNixosSystem "chizuru" "x86_64-linux" (
+        { lib, ... }: {
+          imports = [ ./hardwares/chizuru.nix ];
+          gdforj.desktop.enable = true;
+          # override keymap
+          console.keyMap = lib.mkForce "us";
+          services.xserver.layout = lib.mkForce "us";
+        }
+      );
     };
 }
