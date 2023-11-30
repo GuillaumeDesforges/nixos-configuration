@@ -38,6 +38,12 @@ in
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+    services.printing.drivers = [
+      # HP
+      pkgs.hplip
+      # Canon
+      pkgs.cnijfilter2
+    ];
 
     # Enable sound with pipewire.
     sound.enable = true;
