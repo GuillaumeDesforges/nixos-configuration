@@ -37,7 +37,7 @@ in
     };
 
     # use the Hack font
-    fonts.fonts = with pkgs; [ hack-font ];
+    fonts.packages = with pkgs; [ hack-font ];
 
     # default keymap
     console.keyMap = "fr";

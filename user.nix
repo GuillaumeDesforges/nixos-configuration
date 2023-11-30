@@ -49,7 +49,7 @@ in
 
         # company tools
         tmate
-	cloak
+        cloak
 
         # common build tools
         gnumake
@@ -113,7 +113,7 @@ in
         alsa-utils
         audacity
         ardour
-        bitwig-studio
+        bitwig-studio5
         distrho
         guitarix
       ]
