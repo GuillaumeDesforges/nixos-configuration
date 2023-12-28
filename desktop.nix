@@ -74,6 +74,8 @@ in
     # install Docker
     virtualisation.docker.enable = true;
     virtualisation.docker.enableNvidia = true;
+
+    # OpenGL
     hardware.opengl.driSupport32Bit = true;
 
     # System packages for desktop

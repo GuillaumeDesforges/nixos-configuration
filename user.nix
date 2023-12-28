@@ -7,7 +7,6 @@ in
 {
   imports = [
     flake-inputs.home-manager.nixosModules.home-manager
-    ./secrets.nix
   ];
 
   options.gdforj.user = {
@@ -24,6 +23,7 @@ in
       initialPassword = "password";
     };
 
+    home-manager.useGlobalPkgs = true;
     home-manager.users.gdforj = { pkgs, ... }: {
       home.stateVersion = "22.11";
       programs.home-manager.enable = true;
@@ -43,9 +43,6 @@ in
         # common user tools
         tree
         tmux
-
-        # agenix CLI tool
-        flake-inputs.agenix.packages.x86_64-linux.default
 
         # company tools
         tmate
@@ -119,7 +116,12 @@ in
       ]
       # streaming/recording
       ++ pkgs.lib.optionals cfg.video-apps.enable [
-        (wrapOBS { plugins = [ obs-studio-plugins.obs-backgroundremoval ]; })
+        (wrapOBS {
+          plugins = [
+            #
+            # obs-studio-plugins.obs-backgroundremoval 
+          ];
+        })
       ]
       ;
 
@@ -189,8 +191,8 @@ in
       programs.kitty = mkIf cfg.desktop-apps.enable {
         enable = true;
         font = {
-          name = "Hack Nerd Font Mono";
-          size = 16;
+          name = "HackNerdMono";
+          size = 18;
         };
       };
 
