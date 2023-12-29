@@ -104,6 +104,7 @@ in
 
         # gaming
         steam
+        lutris
       ]
       # music
       ++ pkgs.lib.optionals cfg.music-apps.enable [
