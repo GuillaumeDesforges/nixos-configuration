@@ -39,7 +39,6 @@
           imports = [ ./hardwares/yor.nix ];
           gdforj.desktop.enable = true;
           # override keymap
-          console.keyMap = lib.mkForce "uk";
           services.xserver.layout = lib.mkForce "gb";
         }
       );
@@ -56,7 +55,6 @@
           imports = [ ./hardwares/chizuru.nix ];
           gdforj.desktop.enable = true;
           # override keymap
-          console.keyMap = lib.mkForce "us";
           services.xserver.layout = lib.mkForce "us";
         }
       );
