@@ -48,14 +48,12 @@ in
         tmate
         cloak
 
-        # common build tools
-        gnumake
-
         # Nix utils
         nixpkgs-fmt
         nixpkgs-review
         nix-index
         nix-tree
+        nix-output-monitor
 
         # data processing
         jq
@@ -72,12 +70,6 @@ in
 
         # SaaS
         gh
-
-        # Python
-        poetry
-
-        # JS/TS
-        yarn
       ]
       # desktop
       ++ pkgs.lib.optionals cfg.desktop-apps.enable [
