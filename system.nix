@@ -40,8 +40,9 @@ in
     fonts.packages = with pkgs; [ hack-font ];
 
     # default keymap
-    console.keyMap = "fr";
-    services.xserver.layout = "fr";
+    services.xserver.xkb.layout = "fr";
+    services.xserver.xkb.options = "caps:escape";
+    console.useXkbConfig = true;
 
     # enable my user by default
     gdforj.user.enable = true;
