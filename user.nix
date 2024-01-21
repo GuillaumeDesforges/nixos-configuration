@@ -102,10 +102,13 @@ in
       ++ pkgs.lib.optionals cfg.music-apps.enable [
         alsa-utils
         audacity
-        ardour
-        bitwig-studio5
-        distrho
         guitarix
+
+        bitwig-studio5
+        
+        # OSS music
+        # ardour
+        # distrho
       ]
       # streaming/recording
       ++ pkgs.lib.optionals cfg.video-apps.enable [
