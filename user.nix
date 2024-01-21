@@ -151,8 +151,10 @@ in
           # needed for lazyvim
           pkgs.ripgrep
           pkgs.lazygit
-          # needed for LSP
+          # needed Lua LSP
           pkgs.lua-language-server
+          # needed for Copilot
+          pkgs.nodejs_latest
         ];
 
         # lua config is handled manually by linking files from
