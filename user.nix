@@ -185,6 +185,10 @@ in
           name = "HackNerdMono";
           size = 18;
         };
+        keybindings = {
+          "ctrl+shift+enter" = "new_window_with_cwd";
+          "ctrl+shift+t" = "new_tab_with_cwd";
+          };
       };
 
       home.sessionVariables = {
