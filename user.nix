@@ -57,6 +57,7 @@ in
 
         # data processing
         jq
+        jc
         yq
         jless
 
@@ -154,10 +155,11 @@ in
           # needed to install some plugins
           pkgs.gcc
           pkgs.gnumake
-          # needed Lua LSP
-          pkgs.lua-language-server
           # needed for Copilot
           pkgs.nodejs_latest
+          # user LSPs (others must be provided per-project)
+          pkgs.lua-language-server
+          pkgs.nixd
         ];
 
         # lua config is handled manually by linking files from
