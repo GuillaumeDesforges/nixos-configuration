@@ -105,7 +105,7 @@ in
         guitarix
 
         bitwig-studio5
-        
+
         # OSS music
         # ardour
         # distrho
@@ -151,6 +151,8 @@ in
           # needed for lazyvim
           pkgs.ripgrep
           pkgs.lazygit
+          # needed to install some plugins
+          pkgs.gcc
           # needed Lua LSP
           pkgs.lua-language-server
           # needed for Copilot
@@ -193,7 +195,7 @@ in
         keybindings = {
           "ctrl+shift+enter" = "new_window_with_cwd";
           "ctrl+shift+t" = "new_tab_with_cwd";
-          };
+        };
       };
 
       home.sessionVariables = {
