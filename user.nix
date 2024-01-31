@@ -153,6 +153,7 @@ in
           pkgs.lazygit
           # needed to install some plugins
           pkgs.gcc
+          pkgs.gnumake
           # needed Lua LSP
           pkgs.lua-language-server
           # needed for Copilot
