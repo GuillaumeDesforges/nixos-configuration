@@ -2,6 +2,8 @@
   inputs.nixpkgs.url = "github:nixos/nixpkgs";
   inputs.nixos-wsl.url = "github:nix-community/NixOS-WSL";
   inputs.home-manager.url = "github:nix-community/home-manager";
+  inputs.nixos-generators.url = "github:nix-community/nixos-generators";
+  inputs.nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = { nixpkgs, ... }@flake-inputs:
     let
@@ -59,5 +61,32 @@
           services.xserver.layout = lib.mkForce "us";
         }
       );
+
+      # Bootable ISO
+      packages.x86_64-linux.install-iso =
+        flake-inputs.nixos-generators.nixosGenerate {
+          system = "x86_64-linux";
+          format = "install-iso";
+
+          # modules = [
+          #   ./system.nix
+          #   ({ lib, pkgs, ... }: {
+          #     users.users.gdforj.password = "password";
+          #     users.users.root.password = "password";
+
+          #     # System packages useful for the ISO
+          #     environment.systemPackages = with pkgs; [
+          #       gparted
+          #       (nerdfonts.override { fonts = [ "Hack" ]; })
+          #       google-chrome
+          #     ];
+
+          #     gdforj.desktop.enable = true;
+          #     gdforj.user.desktop-apps.enable = lib.mkForce false;
+          #   })
+          # ];
+          # specialArgs = { inherit flake-inputs; };
+        };
+
     };
 }
