@@ -11,35 +11,25 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-f05d9469-f3cb-4d27-aaf7-355e1abb5a54".device = "/dev/disk/by-uuid/f05d9469-f3cb-4d27-aaf7-355e1abb5a54";
-  boot.initrd.luks.devices."luks-f05d9469-f3cb-4d27-aaf7-355e1abb5a54".keyFile = "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/e232d442-00ea-4c98-a6cc-b87f50e6f844";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/abd6d5fe-2936-4fb0-882a-b117eff6ebb7";
+    { device = "/dev/disk/by-uuid/e66852b1-6684-499f-8a53-8b17ea7aa72d";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-d6961502-f4a8-4318-8c01-5831df05ad2e".device = "/dev/disk/by-uuid/d6961502-f4a8-4318-8c01-5831df05ad2e";
-
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/0E5F-1BDF";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/8099-E080";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/df14d0a2-4b83-449f-9a45-5f89f1c29ccf"; }
+    [ { device = "/dev/disk/by-uuid/d66f2da8-c51b-499f-9833-c749b4cd0ce3"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
