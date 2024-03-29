@@ -44,6 +44,9 @@ in
     services.xserver.xkb.options = "caps:escape";
     console.useXkbConfig = true;
 
+    # allow proper DNS resolution
+    services.resolved.enable = true;
+
     # enable my user by default
     gdforj.user.enable = true;
   };
