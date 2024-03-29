@@ -79,9 +79,9 @@ in
     hardware.opengl.driSupport32Bit = true;
 
     # System packages for desktop
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = [
       # Clipboard utility, necessary for nvim
-      xclip
+      pkgs.xclip
       # Docker
       pkgs.docker-compose
     ];

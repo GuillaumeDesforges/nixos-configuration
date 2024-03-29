@@ -37,7 +37,7 @@ in
     };
 
     # use the Hack font
-    fonts.packages = with pkgs; [ hack-font ];
+    fonts.packages = [ pkgs.hack-font ];
 
     # default keymap
     services.xserver.xkb.layout = "fr";

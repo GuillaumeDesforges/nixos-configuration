@@ -61,32 +61,5 @@
           services.xserver.layout = lib.mkForce "us";
         }
       );
-
-      # Bootable ISO
-      packages.x86_64-linux.install-iso =
-        flake-inputs.nixos-generators.nixosGenerate {
-          system = "x86_64-linux";
-          format = "install-iso";
-
-          # modules = [
-          #   ./system.nix
-          #   ({ lib, pkgs, ... }: {
-          #     users.users.gdforj.password = "password";
-          #     users.users.root.password = "password";
-
-          #     # System packages useful for the ISO
-          #     environment.systemPackages = with pkgs; [
-          #       gparted
-          #       (nerdfonts.override { fonts = [ "Hack" ]; })
-          #       google-chrome
-          #     ];
-
-          #     gdforj.desktop.enable = true;
-          #     gdforj.user.desktop-apps.enable = lib.mkForce false;
-          #   })
-          # ];
-          # specialArgs = { inherit flake-inputs; };
-        };
-
     };
 }
