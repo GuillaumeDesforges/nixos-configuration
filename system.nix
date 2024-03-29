@@ -47,6 +47,12 @@ in
     # allow proper DNS resolution
     services.resolved.enable = true;
 
+    # essential utils
+    environment.systemPackages = [
+      pkgs.binutils
+      pkgs.xxd
+    ];
+
     # enable my user by default
     gdforj.user.enable = true;
   };
