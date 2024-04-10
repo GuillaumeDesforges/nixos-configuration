@@ -90,6 +90,9 @@ in
         # office
         libreoffice
 
+        # productivity
+        obsidian
+
         # multimedia
         vlc
         gimp
