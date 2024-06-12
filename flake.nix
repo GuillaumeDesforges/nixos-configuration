@@ -50,6 +50,7 @@
           imports = [ ./hardwares/nazuna.nix ];
           gdforj.desktop.enable = true;
           gdforj.user.music-apps.enable = true;
+          gdforj.user.gamedev-apps.enable = true;
         }
       );
       # laptops

@@ -14,6 +14,7 @@ in
     desktop-apps.enable = mkEnableOption "install desktop apps";
     music-apps.enable = mkEnableOption "install music apps";
     video-apps.enable = mkEnableOption "install video apps";
+    gamedev-apps.enable = mkEnableOption "install gamedev apps";
   };
 
   config = mkIf cfg.enable {
@@ -125,6 +126,11 @@ in
             # obs-studio-plugins.obs-backgroundremoval 
           ];
         })
+      ]
+      # gamedev
+      ++ pkgs.lib.optionals cfg.gamedev-apps.enable [
+        # Godot
+        godot_4
       ]
       ;
 
