@@ -67,7 +67,9 @@ in
 
         # cloud
         azure-cli
-        google-cloud-sdk
+        (pkgs.google-cloud-sdk.withExtraComponents [
+          pkgs.google-cloud-sdk.components.cloud_sql_proxy
+        ])
         awscli2
         terraform
         kubectl
