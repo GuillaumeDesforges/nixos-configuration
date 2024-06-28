@@ -2,11 +2,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.gdforj.wsl;
-in
-{
-  imports = [
-    flake-inputs.nixos-wsl.nixosModules.wsl
-  ];
+in {
+  imports = [ flake-inputs.nixos-wsl.nixosModules.wsl ];
 
   options.gdforj.wsl = {
     enable = mkEnableOption "Enable if system is on WSL";

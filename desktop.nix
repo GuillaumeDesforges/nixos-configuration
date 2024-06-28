@@ -1,13 +1,8 @@
 { lib, config, flake-inputs, pkgs, ... }:
 let
-  inherit (lib)
-    mkEnableOption
-    mkIf
-    mkOption
-    types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.gdforj.desktop;
-in
-{
+in {
   imports = [ ];
 
   options.gdforj.desktop = {

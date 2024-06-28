@@ -4,22 +4,30 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = { device = "/dev/disk/by-uuid/f71dd744-1d6c-4e4d-a4e3-be0470d62ced"; fsType = "ext4"; };
-  fileSystems."/home" = { device = "/dev/disk/by-uuid/171e9df3-f161-44ba-8e3f-5c988bdbb18a"; fsType = "ext4"; };
-  fileSystems."/boot" = { device = "/dev/disk/by-uuid/6330-C047"; fsType = "vfat"; };
-  swapDevices = [{ device = "/dev/disk/by-uuid/19119300-e100-4843-bf89-8a47cc6352bc"; }];
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/f71dd744-1d6c-4e4d-a4e3-be0470d62ced";
+    fsType = "ext4";
+  };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/171e9df3-f161-44ba-8e3f-5c988bdbb18a";
+    fsType = "ext4";
+  };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/6330-C047";
+    fsType = "vfat";
+  };
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/19119300-e100-4843-bf89-8a47cc6352bc"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -30,7 +38,8 @@
   # networking.interfaces.wlp38s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];

@@ -2,13 +2,8 @@
 let
   inherit (lib) mkIf;
   cfg = config.gdforj;
-in
-{
-  imports = [
-    ./desktop.nix
-    ./wsl.nix
-    ./user.nix
-  ];
+in {
+  imports = [ ./desktop.nix ./wsl.nix ./user.nix ];
 
   config = {
     # don't edit
@@ -17,7 +12,10 @@ in
     # Nix system configuration
     nix = {
       # use the same <nixpkgs> flake/channel as NixOS
-      registry.nixpkgs.from = { type = "indirect"; id = "nixpkgs"; };
+      registry.nixpkgs.from = {
+        type = "indirect";
+        id = "nixpkgs";
+      };
       registry.nixpkgs.to = {
         type = "github";
         owner = "nixos";
@@ -48,10 +46,7 @@ in
     services.resolved.enable = true;
 
     # essential utils
-    environment.systemPackages = [
-      pkgs.binutils
-      pkgs.xxd
-    ];
+    environment.systemPackages = [ pkgs.binutils pkgs.xxd ];
 
     # enable my user by default
     gdforj.user.enable = true;

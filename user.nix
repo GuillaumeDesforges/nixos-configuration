@@ -3,11 +3,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.gdforj.user;
-in
-{
-  imports = [
-    flake-inputs.home-manager.nixosModules.home-manager
-  ];
+in {
+  imports = [ flake-inputs.home-manager.nixosModules.home-manager ];
 
   options.gdforj.user = {
     enable = mkEnableOption "gdforj user";
@@ -36,105 +33,104 @@ in
 
       fonts.fontconfig.enable = true;
 
-      home.packages = with pkgs; [
-        # common sysadmin
-        file
-        wget
-        zip
-        unzip
-        htop
+      home.packages = with pkgs;
+        [
+          # common sysadmin
+          file
+          wget
+          zip
+          unzip
+          htop
 
-        # common user tools
-        tree
-        tmux
+          # common user tools
+          tree
+          tmux
 
-        # company tools
-        tmate
-        cloak
+          # company tools
+          tmate
+          cloak
 
-        # Nix utils
-        nixpkgs-fmt
-        nixpkgs-review
-        nix-index
-        nix-tree
-        nix-output-monitor
+          # Nix utils
+          nixpkgs-fmt
+          nixpkgs-review
+          nix-index
+          nix-tree
+          nix-output-monitor
 
-        # data processing
-        jq
-        jc
-        yq
-        jless
+          # data processing
+          jq
+          jc
+          yq
+          jless
 
-        # cloud
-        azure-cli
-        (pkgs.google-cloud-sdk.withExtraComponents [
-          pkgs.google-cloud-sdk.components.cloud_sql_proxy
-        ])
-        awscli2
-        terraform
-        kubectl
-        kubernetes-helm
+          # cloud
+          azure-cli
+          (pkgs.google-cloud-sdk.withExtraComponents
+            [ pkgs.google-cloud-sdk.components.cloud_sql_proxy ])
+          awscli2
+          terraform
+          kubectl
+          kubernetes-helm
 
-        # SaaS
-        gh
-      ]
-      # desktop
-      ++ pkgs.lib.optionals cfg.desktop-apps.enable [
-        # fonts, to be used in terminal emulators
-        (nerdfonts.override { fonts = [ "Hack" ]; })
+          # SaaS
+          gh
+        ]
+        # desktop
+        ++ pkgs.lib.optionals cfg.desktop-apps.enable [
+          # fonts, to be used in terminal emulators
+          (nerdfonts.override { fonts = [ "Hack" ]; })
 
-        # web
-        google-chrome
+          # web
+          google-chrome
 
-        # social
-        slack
-        element-desktop
+          # social
+          slack
+          element-desktop
 
-        # office
-        libreoffice
+          # office
+          libreoffice
 
-        # productivity
-        obsidian
+          # productivity
+          obsidian
 
-        # multimedia
-        vlc
-        gimp
+          # multimedia
+          vlc
+          gimp
 
-        # dev
-        vscode-fhs
-        dbeaver-bin
+          # dev
+          vscode-fhs
+          dbeaver-bin
 
-        # gaming
-        steam
-        lutris
-      ]
-      # music
-      ++ pkgs.lib.optionals cfg.music-apps.enable [
-        alsa-utils
-        audacity
-        guitarix
+          # gaming
+          steam
+          lutris
+        ]
+        # music
+        ++ pkgs.lib.optionals cfg.music-apps.enable [
+          alsa-utils
+          audacity
+          guitarix
 
-        bitwig-studio5
+          bitwig-studio5
 
-        # OSS music
-        # ardour
-        # distrho
-      ]
-      # streaming/recording
-      ++ pkgs.lib.optionals cfg.video-apps.enable [
-        (wrapOBS {
-          plugins = [
-            #
-            # obs-studio-plugins.obs-backgroundremoval 
-          ];
-        })
-      ]
-      # gamedev
-      ++ pkgs.lib.optionals cfg.gamedev-apps.enable [
-        # Godot
-        godot_4
-      ]
-      ;
+          # OSS music
+          # ardour
+          # distrho
+        ]
+        # streaming/recording
+        ++ pkgs.lib.optionals cfg.video-apps.enable [
+          (wrapOBS {
+            plugins = [
+              #
+              # obs-studio-plugins.obs-backgroundremoval 
+            ];
+          })
+        ]
+        # gamedev
+        ++ pkgs.lib.optionals cfg.gamedev-apps.enable [
+          # Godot
+          godot_4
+        ];
 
       programs.bash = {
         enable = true;
@@ -147,14 +143,11 @@ in
           # set prompt
           export PS1="\u@\h:\W\$ "
         '';
-        shellAliases =
-          {
-            "tmpdir" = "cd $(mktemp -d)";
-          }
-          // (mkIf cfg.desktop-apps.enable {
-            "google-chrome" = "google-chrome-stable";
-          })
-        ;
+        shellAliases = {
+          "tmpdir" = "cd $(mktemp -d)";
+        } // (mkIf cfg.desktop-apps.enable {
+          "google-chrome" = "google-chrome-stable";
+        });
       };
       programs.fzf.enable = true;
 
@@ -189,16 +182,13 @@ in
         userName = "Guillaume Desforges";
 
         extraConfig = {
-          core = {
-            editor = "vim";
-          };
-          pull = {
-            ff = "only";
-          };
+          core = { editor = "vim"; };
+          pull = { ff = "only"; };
         };
 
         aliases = {
-          prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='\''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'\'' refs/heads); do git branch -D $b; done";
+          prune-branches =
+            "!git fetch -p && for b in $(git for-each-ref --format='''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)''' refs/heads); do git branch -D $b; done";
           graph = "log --graph --all --oneline";
         };
       };
@@ -218,8 +208,10 @@ in
       home.sessionVariables = {
         EDITOR = "vim";
       } // (if cfg.music-apps.enable then {
-        LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/:${pkgs.lsp-plugins}/lib/lv2/";
-      } else { });
+        LV2_PATH =
+          "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/:${pkgs.lsp-plugins}/lib/lv2/";
+      } else
+        { });
     };
   };
 }
