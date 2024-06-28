@@ -102,7 +102,7 @@ in
 
         # dev
         vscode-fhs
-        dbeaver
+        dbeaver-bin
 
         # gaming
         steam

@@ -57,16 +57,16 @@ in
       jack.enable = true;
     };
 
+    # Enable SSDM display manager
+    services.displayManager.sddm.enable = true;
+    services.displayManager.autoLogin.enable = true;
+    services.displayManager.autoLogin.user = "gdforj";
+
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
     # Enable the KDE Plasma Desktop Environment.
-    services.xserver.displayManager.sddm.enable = true;
     services.xserver.desktopManager.plasma5.enable = true;
-
-    # Enable automatic login for the user
-    services.xserver.displayManager.autoLogin.enable = true;
-    services.xserver.displayManager.autoLogin.user = "gdforj";
 
     # Install desktop apps by default
     gdforj.user.desktop-apps.enable = true;
@@ -74,9 +74,6 @@ in
     # install Docker
     virtualisation.docker.enable = true;
     virtualisation.docker.enableNvidia = true;
-
-    # OpenGL
-    hardware.opengl.driSupport32Bit = true;
 
     # System packages for desktop
     environment.systemPackages = [
