@@ -2,7 +2,8 @@
 let
   inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.gdforj.desktop;
-in {
+in
+{
   imports = [ ];
 
   options.gdforj.desktop = {
@@ -68,7 +69,6 @@ in {
 
     # install Docker
     virtualisation.docker.enable = true;
-    virtualisation.docker.enableNvidia = true;
 
     # System packages for desktop
     environment.systemPackages = [

@@ -44,6 +44,7 @@
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
+  virtualisation.docker.enableNvidia = true;
   hardware.graphics.enable32Bit = true;
 
   hardware.nvidia.modesetting.enable = true;
