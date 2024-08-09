@@ -167,8 +167,11 @@ in
           # needed for Copilot
           pkgs.nodejs_latest
           # user LSPs (others must be provided per-project)
-          pkgs.lua-language-server
-          pkgs.nixd
+          pkgs.lua-language-server # lua
+          pkgs.nixd # nix
+          pkgs.terraform-ls # hcl
+          pkgs.gopls # golang
+          pkgs.zls # zig
         ];
 
         # lua config is handled manually by linking files from
