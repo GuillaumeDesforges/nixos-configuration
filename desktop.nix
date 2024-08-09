@@ -13,6 +13,16 @@ in
   config = mkIf cfg.enable {
     # enable networking
     networking.networkmanager.enable = true;
+    # enable WEP key
+    nixpkgs.overlays = [
+      (self: super: {
+        wpa_supplicant = super.wpa_supplicant.overrideAttrs (oldAttrs: rec {
+          extraConfig = oldAttrs.extraConfig + ''
+            CONFIG_WEP=y
+          '';
+        });
+      })
+    ];
 
     # Set your time zone.
     time.timeZone = "Europe/Paris";
