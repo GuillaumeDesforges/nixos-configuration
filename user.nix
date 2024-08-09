@@ -3,7 +3,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.gdforj.user;
-in {
+in
+{
   imports = [ flake-inputs.home-manager.nixosModules.home-manager ];
 
   options.gdforj.user = {
@@ -96,6 +97,7 @@ in {
           # multimedia
           vlc
           gimp
+          stremio
 
           # dev
           vscode-fhs
