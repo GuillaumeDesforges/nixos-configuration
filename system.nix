@@ -2,8 +2,9 @@
 let
   inherit (lib) mkIf;
   cfg = config.gdforj;
-in {
-  imports = [ ./desktop.nix ./wsl.nix ./user.nix ];
+in
+{
+  imports = [ ./desktop.nix ./wsl.nix ./user.nix ./minecraft.nix ];
 
   config = {
     # don't edit

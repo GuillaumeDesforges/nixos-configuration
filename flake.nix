@@ -18,7 +18,8 @@
             config
           ];
         };
-    in {
+    in
+    {
       # wsl machines
       nixosConfigurations.kaguya = mkNixosSystem "kaguya" "x86_64-linux"
         ({ ... }: { gdforj.wsl.enable = true; });
@@ -29,6 +30,7 @@
           gdforj.desktop.enable = true;
           gdforj.user.music-apps.enable = true;
           gdforj.user.video-apps.enable = true;
+          gdforj.minecraft-server.enable = true;
         });
       nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux"
         ({ lib, ... }: {
