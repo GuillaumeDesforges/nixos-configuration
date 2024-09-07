@@ -106,6 +106,7 @@ in
           # gaming
           steam
           lutris
+          prismlauncher
         ]
         # music
         ++ pkgs.lib.optionals cfg.music-apps.enable [
