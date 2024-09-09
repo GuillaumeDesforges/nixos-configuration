@@ -15,5 +15,13 @@ in
       allowedTCPPorts = [ 25565 ];
       allowedUDPPorts = [ 25565 ];
     };
+
+    services.cron = {
+      enable = true;
+      systemCronJobs = [
+        "0 19 * * * gdforj (cd /var/lib/minecraft/bpc-revival/ && nix shell nixpkgs#openjdk --command java -Xmx1024M -Xms1024M -jar minecraft_server.1.21.1.jar nogui)"
+        "0 23 * * * gdforj (cd /var/lib/minecraft/bpc-revival/ && nix shell nixpkgs#rcon --command rcon -H localhost -p $(cat server.properties | grep 'rcon.port' | cut -c 11-) -P $(cat server.properties | grep 'rcon.password' | cut -c 15-) stop)"
+      ];
+    };
   };
 }
