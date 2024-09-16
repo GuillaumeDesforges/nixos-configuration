@@ -30,7 +30,11 @@
           gdforj.desktop.enable = true;
           gdforj.user.music-apps.enable = true;
           gdforj.user.video-apps.enable = true;
-          gdforj.minecraft-server.enable = true;
+          # minecraft
+          networking.firewall = {
+            allowedTCPPorts = [ 25565 ];
+            allowedUDPPorts = [ 25565 ];
+          };
         });
       nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux"
         ({ lib, ... }: {
