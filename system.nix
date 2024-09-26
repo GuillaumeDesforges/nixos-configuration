@@ -4,7 +4,7 @@ let
   cfg = config.gdforj;
 in
 {
-  imports = [ ./desktop.nix ./wsl.nix ./user.nix ];
+  imports = [ ./desktop.nix ./user.nix ];
 
   config = {
     # don't edit

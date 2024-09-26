@@ -1,9 +1,6 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs";
-  inputs.nixos-wsl.url = "github:nix-community/NixOS-WSL";
-  inputs.home-manager.url = "github:nix-community/home-manager";
-  inputs.nixos-generators.url = "github:nix-community/nixos-generators";
-  inputs.nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+  inputs.home-manager.url = "github:nix-community/home-manager/release-24.05";
 
   outputs = { nixpkgs, ... }@flake-inputs:
     let
@@ -20,9 +17,6 @@
         };
     in
     {
-      # wsl machines
-      nixosConfigurations.kaguya = mkNixosSystem "kaguya" "x86_64-linux"
-        ({ ... }: { gdforj.wsl.enable = true; });
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem "tosaka" "x86_64-linux"
         ({ ... }: {
