@@ -13,6 +13,7 @@ in
     music-apps.enable = mkEnableOption "install music apps";
     video-apps.enable = mkEnableOption "install video apps";
     gamedev-apps.enable = mkEnableOption "install gamedev apps";
+    work-apps.enable = mkEnableOption "install work apps";
   };
 
   config = mkIf cfg.enable {
@@ -133,6 +134,19 @@ in
         ++ pkgs.lib.optionals cfg.gamedev-apps.enable [
           # Godot
           godot_4
+        ]
+        # work
+        ++ pkgs.lib.optionals cfg.work-apps.enable [
+          # data
+          postgresql
+          # golang
+          go
+          gopls
+          # javascript
+          nodejs_latest
+          pnpm
+          # secrets
+          sops
         ];
 
       programs.bash = {

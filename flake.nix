@@ -24,6 +24,7 @@
           gdforj.desktop.enable = true;
           gdforj.user.music-apps.enable = true;
           gdforj.user.video-apps.enable = true;
+          gdforj.user.work-apps.enable = true;
           # minecraft
           networking.firewall = {
             allowedTCPPorts = [ 25565 ];
@@ -44,14 +45,7 @@
           gdforj.desktop.enable = true;
           gdforj.user.music-apps.enable = true;
           gdforj.user.gamedev-apps.enable = true;
-        });
-      # laptops
-      nixosConfigurations.chizuru = mkNixosSystem "chizuru" "x86_64-linux"
-        ({ lib, ... }: {
-          imports = [ ./hardwares/chizuru.nix ];
-          gdforj.desktop.enable = true;
-          # override keymap
-          services.xserver.layout = lib.mkForce "us";
+          gdforj.user.work-apps.enable = true;
         });
     };
 }
