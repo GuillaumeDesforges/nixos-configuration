@@ -4,6 +4,10 @@
 
   outputs = { nixpkgs, ... }@flake-inputs:
     let
+      overlay = final: prev: {
+        dbeaver-bin = final.callPackage ./packages/dbeaver { settings = { Xmx = "4096m"; }; };
+      };
+
       # helper function to make the NixOS system configuration
       mkNixosSystem = hostname: system: config:
         nixpkgs.lib.nixosSystem {
@@ -11,12 +15,17 @@
           specialArgs = { inherit flake-inputs; };
           modules = [
             ./system.nix
+            ({ ... }: { nixpkgs.overlays = [ overlay ]; })
             ({ ... }: { networking.hostName = hostname; })
             config
           ];
         };
     in
     {
+      overlay = overlay;
+      packages.x86_64-linux = {
+        dbeaver = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/dbeaver { };
+      };
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem "tosaka" "x86_64-linux"
         ({ ... }: {
