@@ -9,11 +9,12 @@ in
 
   options.gdforj.user = {
     enable = mkEnableOption "gdforj user";
-    desktop-apps.enable = mkEnableOption "install desktop apps";
-    music-apps.enable = mkEnableOption "install music apps";
-    video-apps.enable = mkEnableOption "install video apps";
-    gamedev-apps.enable = mkEnableOption "install gamedev apps";
-    work-apps.enable = mkEnableOption "install work apps";
+    apps.desktop.enable = mkEnableOption "install desktop apps";
+    apps.work.enable = mkEnableOption "install work apps";
+    apps.music.enable = mkEnableOption "install music apps";
+    apps.video.enable = mkEnableOption "install video apps";
+    apps.gaming.enable = mkEnableOption "install gaming apps";
+    apps.gamedev.enable = mkEnableOption "install gamedev apps";
   };
 
   config = mkIf cfg.enable {
@@ -36,22 +37,8 @@ in
       fonts.fontconfig.enable = true;
 
       home.packages = with pkgs;
+        # common
         [
-          # common sysadmin
-          file
-          wget
-          zip
-          unzip
-          htop
-
-          # common user tools
-          tree
-          tmux
-
-          # company tools
-          tmate
-          cloak
-
           # Nix utils
           nixpkgs-fmt
           nixpkgs-review
@@ -65,20 +52,13 @@ in
           yq
           jless
 
-          # cloud
-          azure-cli
+          # dev tools
           (pkgs.google-cloud-sdk.withExtraComponents
             [ pkgs.google-cloud-sdk.components.cloud_sql_proxy ])
-          awscli2
-          terraform
-          kubectl
-          kubernetes-helm
-
-          # SaaS
           gh
         ]
         # desktop
-        ++ pkgs.lib.optionals cfg.desktop-apps.enable [
+        ++ pkgs.lib.optionals cfg.apps.desktop.enable [
           # fonts, to be used in terminal emulators
           (nerdfonts.override { fonts = [ "Hack" ]; })
 
@@ -89,10 +69,8 @@ in
           slack
           element-desktop
 
-          # office
+          # office & productivity
           libreoffice
-
-          # productivity
           obsidian
 
           # multimedia
@@ -103,51 +81,55 @@ in
           # dev
           vscode-fhs
           dbeaver-bin
+          ripgrep
+          lazygit
+        ]
+        # work
+        ++ pkgs.lib.optionals cfg.apps.work.enable [
+          # cloud
+          awscli2
+          kubectl
+          kubernetes-helm
 
-          # gaming
-          steam
-          lutris
-          prismlauncher
+          # data
+          postgresql
+
+          # golang
+          go
+          gopls
+
+          # javascript
+          nodejs_latest
+          pnpm
+
+          # secrets
+          sops
         ]
         # music
-        ++ pkgs.lib.optionals cfg.music-apps.enable [
+        ++ pkgs.lib.optionals cfg.apps.music.enable [
           alsa-utils
           audacity
           guitarix
 
           bitwig-studio5
 
-          # OSS music
+          # # OSS music
           # ardour
           # distrho
         ]
         # streaming/recording
-        ++ pkgs.lib.optionals cfg.video-apps.enable [
+        ++ pkgs.lib.optionals cfg.apps.video.enable [
           (wrapOBS {
             plugins = [
-              #
               # obs-studio-plugins.obs-backgroundremoval 
             ];
           })
         ]
+        # gaming
+        ++ pkgs.lib.optionals cfg.apps.gaming.enable [ steam lutris prismlauncher ]
         # gamedev
-        ++ pkgs.lib.optionals cfg.gamedev-apps.enable [
-          # Godot
-          godot_4
-        ]
-        # work
-        ++ pkgs.lib.optionals cfg.work-apps.enable [
-          # data
-          postgresql
-          # golang
-          go
-          gopls
-          # javascript
-          nodejs_latest
-          pnpm
-          # secrets
-          sops
-        ];
+        ++ pkgs.lib.optionals cfg.apps.gamedev.enable [ godot_4 ]
+      ;
 
       programs.bash = {
         enable = true;
@@ -162,7 +144,7 @@ in
         '';
         shellAliases = {
           "tmpdir" = "cd $(mktemp -d)";
-        } // (mkIf cfg.desktop-apps.enable {
+        } // (mkIf cfg.apps.desktop.enable {
           "google-chrome" = "google-chrome-stable";
         });
       };
@@ -213,7 +195,7 @@ in
         };
       };
 
-      programs.kitty = mkIf cfg.desktop-apps.enable {
+      programs.kitty = mkIf cfg.apps.desktop.enable {
         enable = true;
         font = {
           name = "HackNerdMono";
@@ -227,7 +209,7 @@ in
 
       home.sessionVariables = {
         EDITOR = "vim";
-      } // (if cfg.music-apps.enable then {
+      } // (if cfg.apps.music.enable then {
         LV2_PATH =
           "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/:${pkgs.lsp-plugins}/lib/lv2/";
       } else

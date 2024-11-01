@@ -41,13 +41,13 @@
   hardware.cpu.amd.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  # NVIDIA drivers
+  # Graphics & NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.graphics.enable = true;
-  hardware.opengl.enable = true;
+  hardware.nvidia.open = false;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  warnings = [ "Reminder: NVIDIA driver had been set to beta: ${config.hardware.nvidia.package}" ];
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
   hardware.nvidia-container-toolkit.enable = true;
-  # hardware.graphics.enable32Bit = true;
-  hardware.opengl.driSupport32Bit = true;
-
   hardware.nvidia.modesetting.enable = true;
 }

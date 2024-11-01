@@ -1,4 +1,4 @@
-{ lib, config, flake-inputs, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.gdforj.desktop;
@@ -13,16 +13,17 @@ in
   config = mkIf cfg.enable {
     # enable networking
     networking.networkmanager.enable = true;
-    # enable WEP key
-    nixpkgs.overlays = [
-      (self: super: {
-        wpa_supplicant = super.wpa_supplicant.overrideAttrs (oldAttrs: rec {
-          extraConfig = oldAttrs.extraConfig + ''
-            CONFIG_WEP=y
-          '';
-        });
-      })
-    ];
+    # # Enable WEP key
+    # # I hope I never have to use this, as it's not secure at all.
+    # nixpkgs.overlays = [
+    #   (self: super: {
+    #     wpa_supplicant = super.wpa_supplicant.overrideAttrs (oldAttrs: rec {
+    #       extraConfig = oldAttrs.extraConfig + ''
+    #         CONFIG_WEP=y
+    #       '';
+    #     });
+    #   })
+    # ];
 
     # Set your time zone.
     time.timeZone = "Europe/Paris";
@@ -52,7 +53,6 @@ in
     ];
 
     # Enable sound with pipewire.
-    sound.enable = false;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
@@ -74,10 +74,7 @@ in
     # Enable the KDE Plasma Desktop Environment.
     services.xserver.desktopManager.plasma5.enable = true;
 
-    # Install desktop apps by default
-    gdforj.user.desktop-apps.enable = true;
-
-    # install Docker
+    # Install Docker
     virtualisation.docker.enable = true;
 
     # System packages for desktop

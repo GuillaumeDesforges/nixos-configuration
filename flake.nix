@@ -2,19 +2,34 @@
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
   inputs.home-manager.url = "github:nix-community/home-manager/release-24.05";
 
+  inputs.nixpkgs-master.url = "github:nixos/nixpkgs/e4735dbdda8288aef24141f3ae8848a14f06fe08";
+  inputs.home-manager-master.url = "github:nix-community/home-manager/e83414058edd339148dc142a8437edb9450574c8";
+
   outputs = { nixpkgs, ... }@flake-inputs:
     let
+      # custom packages
       overlay = final: prev: {
-        dbeaver-bin = final.callPackage ./packages/dbeaver { settings = { Xmx = "4096m"; }; };
+        dbeaver-bin = final.callPackage ./packages/dbeaver { override_xmx = "4096m"; };
       };
 
-      # helper function to make the NixOS system configuration
-      mkNixosSystem = hostname: system: config:
-        nixpkgs.lib.nixosSystem {
+      # helper function to make NixOS systems with common config
+      mkNixosSystem =
+        { nixpkgs ? flake-inputs.nixpkgs
+        , home-manager ? flake-inputs.home-manager
+        , hostname
+        , system
+        , config
+        }: nixpkgs.lib.nixosSystem {
           system = system;
-          specialArgs = { inherit flake-inputs; };
+          specialArgs = {
+            flake-inputs = { inherit home-manager; };
+          };
           modules = [
             ./system.nix
+            ./desktop.nix
+            ./user.nix
+            ({ ... }: { gdforj.nixpkgs.rev = nixpkgs.sourceInfo.rev; })
+            ({ ... }: { gdforj.user.enable = true; })
             ({ ... }: { nixpkgs.overlays = [ overlay ]; })
             ({ ... }: { networking.hostName = hostname; })
             config
@@ -22,39 +37,46 @@
         };
     in
     {
+      # if you want to use the custom packages
       overlay = overlay;
-      packages.x86_64-linux = {
-        dbeaver = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/dbeaver { };
-      };
+
       # desktops
-      nixosConfigurations.tosaka = mkNixosSystem "tosaka" "x86_64-linux"
-        ({ ... }: {
+      nixosConfigurations.tosaka = mkNixosSystem {
+        hostname = "tosaka";
+        system = "x86_64-linux";
+        nixpkgs = flake-inputs.nixpkgs-master;
+        home-manager = flake-inputs.home-manager-master;
+        config = ({ ... }: {
           imports = [ ./hardwares/tosaka.nix ];
           gdforj.desktop.enable = true;
-          gdforj.user.music-apps.enable = true;
-          gdforj.user.video-apps.enable = true;
-          gdforj.user.work-apps.enable = true;
-          # minecraft
-          networking.firewall = {
-            allowedTCPPorts = [ 25565 ];
-            allowedUDPPorts = [ 25565 ];
-          };
+          gdforj.user.apps.desktop.enable = true;
+          gdforj.user.apps.work.enable = true;
+          gdforj.user.apps.gaming.enable = true;
         });
-      nixosConfigurations.yor = mkNixosSystem "yor" "x86_64-linux"
-        ({ lib, ... }: {
+      };
+
+      nixosConfigurations.yor = mkNixosSystem {
+        hostname = "yor";
+        system = "x86_64-linux";
+        config = ({ lib, ... }: {
           imports = [ ./hardwares/yor.nix ];
           gdforj.desktop.enable = true;
+          gdforj.user.apps.desktop.enable = true;
           # override keymap
           services.xserver.layout = lib.mkForce "gb";
         });
+      };
+
       # laptop
-      nixosConfigurations.nazuna = mkNixosSystem "nazuna" "x86_64-linux"
-        ({ ... }: {
+      nixosConfigurations.nazuna = mkNixosSystem {
+        hostname = "nazuna";
+        system = "x86_64-linux";
+        config = ({ ... }: {
           imports = [ ./hardwares/nazuna.nix ];
           gdforj.desktop.enable = true;
-          gdforj.user.music-apps.enable = true;
-          gdforj.user.gamedev-apps.enable = true;
-          gdforj.user.work-apps.enable = true;
+          gdforj.user.apps.desktop.enable = true;
+          gdforj.user.apps.work.enable = true;
         });
+      };
     };
 }

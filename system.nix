@@ -1,10 +1,20 @@
-{ lib, config, flake-inputs, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkOption mkIf;
   cfg = config.gdforj;
 in
 {
-  imports = [ ./desktop.nix ./user.nix ];
+  options.gdforj.nixpkgs.rev = mkOption {
+    default = "";
+    type = lib.types.str;
+  };
+
+  config.assertions = [
+    {
+      assertion = config.gdforj.nixpkgs.rev != "";
+      message = "Missing config `gdforj.nixpkgs.rev`";
+    }
+  ];
 
   config = {
     # don't edit
@@ -21,7 +31,7 @@ in
         type = "github";
         owner = "nixos";
         repo = "nixpkgs";
-        rev = flake-inputs.nixpkgs.sourceInfo.rev;
+        rev = config.gdforj.nixpkgs.rev;
       };
       # system-wide Nix settings
       settings = {
@@ -47,9 +57,17 @@ in
     services.resolved.enable = true;
 
     # essential utils
-    environment.systemPackages = [ pkgs.binutils pkgs.xxd ];
-
-    # enable my user by default
-    gdforj.user.enable = true;
+    environment.systemPackages = [
+      # sysadmin
+      pkgs.binutils
+      pkgs.xxd
+      pkgs.file
+      pkgs.wget
+      pkgs.zip
+      pkgs.unzip
+      pkgs.htop
+      pkgs.tree
+      pkgs.tmux
+    ];
   };
 }

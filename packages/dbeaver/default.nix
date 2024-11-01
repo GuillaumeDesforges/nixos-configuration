@@ -12,7 +12,7 @@
 , glib
 , webkitgtk
 , glib-networking
-, settings ? { Xmx = "2048m"; }
+, override_xmx ? "1024m"
 }:
 
 stdenvNoCC.mkDerivation (finalAttrs: {
@@ -57,7 +57,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   prePatch = ''
     substituteInPlace dbeaver.ini \
-      --replace-fail '-Xmx1024m' '-Xmx${settings.Xmx}'
+      --replace-fail '-Xmx1024m' '-Xmx${override_xmx}'
   '';
 
   installPhase =
