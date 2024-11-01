@@ -1,18 +1,19 @@
-{ lib
-, stdenvNoCC
-, fetchurl
-, undmg
-, makeWrapper
-, openjdk17
-, gnused
-, autoPatchelfHook
-, wrapGAppsHook3
-, gtk3
-, swt
-, glib
-, webkitgtk
-, glib-networking
-, override_xmx ? "1024m"
+{
+  lib,
+  stdenvNoCC,
+  fetchurl,
+  undmg,
+  makeWrapper,
+  openjdk17,
+  gnused,
+  autoPatchelfHook,
+  wrapGAppsHook3,
+  gtk3,
+  swt,
+  glib,
+  webkitgtk,
+  glib-networking,
+  override_xmx ? "1024m",
 }:
 
 stdenvNoCC.mkDerivation (finalAttrs: {

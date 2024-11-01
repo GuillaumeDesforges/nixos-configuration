@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkOption mkIf;
   cfg = config.gdforj;
@@ -35,7 +40,10 @@ in
       };
       # system-wide Nix settings
       settings = {
-        experimental-features = [ "nix-command" "flakes" ];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         bash-prompt-prefix = "[] ";
       };
     };
