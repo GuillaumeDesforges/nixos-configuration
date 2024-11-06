@@ -98,7 +98,8 @@
         );
       };
 
-      # laptop
+      # laptops
+
       nixosConfigurations.nazuna = mkNixosSystem {
         hostname = "nazuna";
         system = "x86_64-linux";
@@ -109,6 +110,24 @@
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
             gdforj.user.apps.work.enable = true;
+          }
+        );
+      };
+
+      nixosConfigurations.echidna = mkNixosSystem {
+        hostname = "echidna";
+        system = "x86_64-linux";
+        nixpkgs = flake-inputs.nixpkgs-master;
+        home-manager = flake-inputs.home-manager-master;
+        config = (
+          { lib, ... }:
+          {
+            imports = [ ./hardwares/echidna.nix ];
+            gdforj.desktop.enable = true;
+            gdforj.user.apps.desktop.enable = true;
+            gdforj.user.apps.work.enable = true;
+            # override keymap
+            services.xserver.layout = lib.mkForce "us";
           }
         );
       };
