@@ -100,8 +100,7 @@ in
           ++ pkgs.lib.optionals cfg.apps.work.enable [
             # cloud
             awscli2
-            kubectl
-            kubernetes-helm
+            heroku
 
             # data
             postgresql
