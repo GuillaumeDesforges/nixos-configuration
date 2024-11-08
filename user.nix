@@ -68,6 +68,9 @@ in
             gnumake
             (pkgs.google-cloud-sdk.withExtraComponents [ pkgs.google-cloud-sdk.components.cloud_sql_proxy ])
             gh
+
+            # productivity
+            zk
           ]
           # desktop
           ++ pkgs.lib.optionals cfg.apps.desktop.enable [
