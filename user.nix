@@ -101,9 +101,11 @@ in
           ]
           # work
           ++ pkgs.lib.optionals cfg.apps.work.enable [
-            # cloud
+            # cloud & ops
             awscli2
             heroku
+            flyway
+            envsubst
 
             # data
             postgresql
