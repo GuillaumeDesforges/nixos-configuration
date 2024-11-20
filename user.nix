@@ -113,6 +113,7 @@ in
             # golang
             go
             gopls
+            sqlc
 
             # javascript
             nodejs_latest
