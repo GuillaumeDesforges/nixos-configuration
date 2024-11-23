@@ -88,7 +88,7 @@ in
 
             # office & productivity
             libreoffice
-            obsidian
+            simple-scan
 
             # multimedia
             vlc
