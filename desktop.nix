@@ -1,8 +1,7 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
+{ lib
+, config
+, pkgs
+, ...
 }:
 let
   inherit (lib)
@@ -61,6 +60,11 @@ in
       # Canon
       pkgs.cnijfilter2
     ];
+    hardware.sane.enable = true;
+    hardware.sane.extraBackends = [ pkgs.sane-airscan ];
+    services.udev.packages = [ pkgs.sane-airscan ];
+    services.avahi.enable = true;
+    services.avahi.nssmdns = true;
 
     # Enable sound with pipewire.
     hardware.pulseaudio.enable = false;

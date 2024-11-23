@@ -26,8 +26,10 @@ in
     users.users.gdforj = {
       isNormalUser = true;
       extraGroups = [
-        "wheel"
         "docker"
+        "lp"
+        "scanner"
+        "wheel"
       ];
       initialPassword = "password";
     };
