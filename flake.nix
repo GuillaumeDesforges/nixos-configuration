@@ -17,12 +17,12 @@
 
       # helper function to make NixOS systems with common config
       mkNixosSystem =
-        { nixpkgs ? flake-inputs.nixpkgs
-        , home-manager ? flake-inputs.home-manager
-        , hostname
-        , system
-        , config
-        ,
+        {
+          nixpkgs ? flake-inputs.nixpkgs,
+          home-manager ? flake-inputs.home-manager,
+          hostname,
+          system,
+          config,
         }:
         nixpkgs.lib.nixosSystem {
           system = system;
