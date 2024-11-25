@@ -178,6 +178,10 @@ in
           enable = true;
           vimAlias = true;
           # add programs needed for plugins
+          withNodeJs = true;
+          plugins = with pkgs.vimPlugins; [
+            lazy-nvim
+          ];
           extraPackages = [
             # needed for lazyvim
             pkgs.ripgrep
@@ -185,8 +189,6 @@ in
             # needed to install some plugins
             pkgs.gcc
             pkgs.gnumake
-            # needed for Copilot
-            pkgs.nodejs_latest
             # user LSPs (others must be provided per-project)
             pkgs.lua-language-server # lua
             pkgs.nixd # nix
