@@ -129,11 +129,10 @@ in
           ++ pkgs.lib.optionals cfg.apps.music.enable [
             alsa-utils
             audacity
-            guitarix
-
             bitwig-studio5
 
             # # OSS music
+            # guitarix
             # ardour
             # distrho
           ]
@@ -244,7 +243,12 @@ in
           // (
             if cfg.apps.music.enable then
               {
-                LV2_PATH = "${pkgs.drumgizmo}/lib/lv2/:${pkgs.distrho}/lib/lv2/:${pkgs.guitarix}/lib/lv2/:${pkgs.lsp-plugins}/lib/lv2/";
+                LV2_PATH = lib.strings.concatMapStringsSep ":" (p: "${p}/lib/lv2") [
+                  pkgs.lsp-plugins
+                  # pkgs.drumgizmo
+                  # pkgs.guitarix
+                  # pkgs.distrho # broken
+                ];
               }
             else
               { }
