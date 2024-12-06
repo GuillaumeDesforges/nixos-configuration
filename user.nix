@@ -105,6 +105,7 @@ in
           # work
           ++ pkgs.lib.optionals cfg.apps.work.enable [
             # cloud & ops
+            just
             awscli2
             heroku
             flyway
