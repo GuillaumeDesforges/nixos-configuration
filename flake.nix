@@ -1,11 +1,6 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-  inputs.home-manager.url = "github:nix-community/home-manager/release-24.05";
-
-  inputs.nixpkgs-master.url = "github:nixos/nixpkgs/e4735dbdda8288aef24141f3ae8848a14f06fe08";
-  inputs.home-manager-master.url = "github:nix-community/home-manager/e83414058edd339148dc142a8437edb9450574c8";
-
-  inputs."nixpkgs-24.11".url = "github:nixos/nixpkgs/release-24.11";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+  inputs.home-manager.url = "github:nix-community/home-manager/release-24.11";
 
   outputs =
     { nixpkgs, ... }@flake-inputs:
@@ -38,24 +33,10 @@
             (
               { ... }:
               {
+                # shared config
                 gdforj.nixpkgs.rev = nixpkgs.sourceInfo.rev;
-              }
-            )
-            (
-              { ... }:
-              {
                 gdforj.user.enable = true;
-              }
-            )
-            (
-              { ... }:
-              {
                 nixpkgs.overlays = [ overlay ];
-              }
-            )
-            (
-              { ... }:
-              {
                 networking.hostName = hostname;
               }
             )
@@ -71,8 +52,6 @@
       nixosConfigurations.tosaka = mkNixosSystem {
         hostname = "tosaka";
         system = "x86_64-linux";
-        nixpkgs = flake-inputs.nixpkgs-master;
-        home-manager = flake-inputs.home-manager-master;
         config = (
           { ... }:
           {
@@ -120,8 +99,6 @@
       nixosConfigurations.echidna = mkNixosSystem {
         hostname = "echidna";
         system = "x86_64-linux";
-        nixpkgs = flake-inputs."nixpkgs-24.11";
-        home-manager = flake-inputs.home-manager-master;
         config = (
           { lib, ... }:
           {
