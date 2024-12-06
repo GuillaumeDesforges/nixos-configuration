@@ -141,7 +141,7 @@ in
           ++ pkgs.lib.optionals cfg.apps.video.enable [
             (wrapOBS {
               plugins = [
-                # obs-studio-plugins.obs-backgroundremoval 
+                # obs-studio-plugins.obs-backgroundremoval
               ];
             })
           ]
