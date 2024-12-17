@@ -64,7 +64,7 @@ in
             # data processing
             jq
             jc
-            yq
+            yq-go
             jless
 
             # dev tools
