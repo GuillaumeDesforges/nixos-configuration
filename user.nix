@@ -30,6 +30,7 @@ in
         "docker"
         "lp"
         "scanner"
+        "plugdev"
         "wheel"
       ];
       initialPassword = "password";
