@@ -45,6 +45,7 @@ in
           "flakes"
         ];
         bash-prompt-prefix = "[] ";
+        flake-registry = "";
       };
     };
     # system-wide nixpkgs settings
