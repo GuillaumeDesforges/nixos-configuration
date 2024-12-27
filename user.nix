@@ -109,8 +109,10 @@ in
             just
             awscli2
             heroku
+            hcp
             flyway
             envsubst
+            mage
 
             # data
             postgresql
