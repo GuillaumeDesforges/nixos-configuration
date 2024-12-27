@@ -78,5 +78,8 @@ in
       pkgs.tree
       pkgs.tmux
     ];
+
+    # run arbitrary binaries
+    programs.nix-ld.enable = true;
   };
 }
