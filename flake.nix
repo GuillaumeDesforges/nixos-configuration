@@ -8,6 +8,7 @@
       # custom packages
       overlay = final: prev: {
         dbeaver-bin = final.callPackage ./packages/dbeaver { override_xmx = "4096m"; };
+        hcp = final.callPackage ./packages/hcp { };
       };
 
       # helper function to make NixOS systems with common config
@@ -47,6 +48,12 @@
     {
       # if you want to use the custom packages
       overlay = overlay;
+
+      packages.x86_64-linux.hcp =
+        let
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        in
+        pkgs.callPackage ./packages/hcp { };
 
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem {
