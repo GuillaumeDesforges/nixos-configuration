@@ -129,5 +129,13 @@ in
       # Docker
       pkgs.docker-compose
     ];
+
+    # Fix xdg-open
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      wlr.enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+    };
   };
 }
