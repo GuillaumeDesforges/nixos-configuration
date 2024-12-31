@@ -99,35 +99,33 @@ in
 
             # dev
             vscode-fhs
+            code-cursor
             dbeaver-bin
             ripgrep
             lazygit
           ]
           # work
           ++ pkgs.lib.optionals cfg.apps.work.enable [
-            # cloud & ops
+            # ops
+            gnumake
             just
+            mage
+            # cloud
             awscli2
             heroku
             hcp
-            flyway
-            envsubst
-            mage
-
+            # secrets
+            sops
             # data
             postgresql
-
+            flyway
             # golang
             go
             gopls
             sqlc
-
             # javascript
             nodejs_latest
             pnpm
-
-            # secrets
-            sops
           ]
           # music
           ++ pkgs.lib.optionals cfg.apps.music.enable [
