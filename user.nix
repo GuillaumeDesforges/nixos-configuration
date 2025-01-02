@@ -122,6 +122,7 @@ in
             # golang
             go
             gopls
+            air
             sqlc
             # javascript
             nodejs_latest
