@@ -115,6 +115,9 @@ in
             awscli2
             heroku
             hcp
+            # infra
+            terraform
+            kubectl
             # secrets
             sops
             # data
