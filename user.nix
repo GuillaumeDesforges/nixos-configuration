@@ -110,6 +110,7 @@ in
             gnumake
             just
             mage
+            envsubst
             # cloud
             awscli2
             heroku
