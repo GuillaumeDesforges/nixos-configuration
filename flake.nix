@@ -7,7 +7,8 @@
     let
       # custom packages
       overlay = final: prev: {
-        dbeaver-bin = final.callPackage ./packages/dbeaver { override_xmx = "4096m"; };
+        dbeaver-bin = prev.dbeaver-bin.override { override_xmx = "4096m"; };
+        code-cursor = final.callPackage ./packages/code-cursor { };
         hcp = final.callPackage ./packages/hcp { };
       };
 
@@ -48,12 +49,6 @@
     {
       # if you want to use the custom packages
       overlay = overlay;
-
-      packages.x86_64-linux.hcp =
-        let
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        in
-        pkgs.callPackage ./packages/hcp { };
 
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem {
