@@ -118,6 +118,7 @@ in
             # infra
             terraform
             kubectl
+            kubernetes-helm
             # secrets
             sops
             # data
@@ -126,8 +127,10 @@ in
             # golang
             go
             gopls
+            delve
             air
             sqlc
+            templ
             # javascript
             nodejs_latest
             pnpm
