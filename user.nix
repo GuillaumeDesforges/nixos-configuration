@@ -115,6 +115,7 @@ in
             awscli2
             heroku
             hcp
+            temporal-cli
             # infra
             terraform
             kubectl
