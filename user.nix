@@ -206,6 +206,7 @@ in
             pkgs.terraform-ls # hcl
             pkgs.gopls # golang
             pkgs.zls # zig
+            pkgs.vscode-langservers-extracted # HTML, CSS, JSON, ESLint
           ];
 
           # lua config is handled manually by linking files from
