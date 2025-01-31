@@ -207,6 +207,7 @@ in
             pkgs.gopls # golang
             pkgs.zls # zig
             pkgs.vscode-langservers-extracted # HTML, CSS, JSON, ESLint
+            pkgs.jdt-language-server # java
           ];
 
           # lua config is handled manually by linking files from
