@@ -50,6 +50,7 @@ in
 
         fonts.fontconfig.enable = true;
 
+        home.sessionPath = [ "$HOME/.gdforj/bin" ];
         home.packages =
           with pkgs;
           # common
