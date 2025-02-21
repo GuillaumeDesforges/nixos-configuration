@@ -129,6 +129,7 @@ in
             # golang
             go
             gopls
+            golangci-lint
             delve
             air
             sqlc
