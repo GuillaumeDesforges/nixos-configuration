@@ -101,6 +101,7 @@ in
             # dev
             vscode-fhs
             code-cursor
+            aider-chat
             dbeaver-bin
             ripgrep
             lazygit

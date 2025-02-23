@@ -7,6 +7,7 @@
     let
       # custom packages
       overlay = final: prev: {
+        aider-chat = prev.callPackage ./packages/aider-chat { };
         dbeaver-bin = prev.dbeaver-bin.override { override_xmx = "4096m"; };
         code-cursor = final.callPackage ./packages/code-cursor { };
         hcp = final.callPackage ./packages/hcp { };
