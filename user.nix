@@ -113,6 +113,8 @@ in
             just
             mage
             envsubst
+            # devops
+            pre-commit
             # cloud
             awscli2
             heroku
