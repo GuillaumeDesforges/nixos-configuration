@@ -109,32 +109,33 @@ in
           # work
           ++ pkgs.lib.optionals cfg.apps.work.enable [
             # ops
+            envsubst
             gnumake
             just
             mage
-            envsubst
             # devops
             pre-commit
             # cloud
             awscli2
-            heroku
             hcp
+            heroku
             temporal-cli
             # infra
-            terraform
             kubectl
             kubernetes-helm
+            terraform
             # secrets
             sops
             # data
-            postgresql
             flyway
+            postgresql
             # golang
-            go
-            gopls
-            golangci-lint
-            delve
             air
+            delve
+            exhaustruct
+            go
+            golangci-lint
+            gopls
             sqlc
             templ
             # javascript

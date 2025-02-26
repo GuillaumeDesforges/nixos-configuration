@@ -8,8 +8,9 @@
       # custom packages
       overlay = final: prev: {
         aider-chat = prev.callPackage ./packages/aider-chat { };
-        dbeaver-bin = prev.dbeaver-bin.override { override_xmx = "4096m"; };
         code-cursor = final.callPackage ./packages/code-cursor { };
+        dbeaver-bin = prev.dbeaver-bin.override { override_xmx = "4096m"; };
+        exhaustruct = prev.callPackage ./packages/exhaustruct { };
         hcp = final.callPackage ./packages/hcp { };
         sqlc = prev.sqlc.overrideAttrs (old: {
           version = "1.28.0";
