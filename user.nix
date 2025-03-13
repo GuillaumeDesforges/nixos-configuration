@@ -133,10 +133,10 @@ in
             air
             delve
             exhaustruct
-            go
-            golangci-lint
-            gopls
-            sqlc
+            flake-inputs.nixpkgs-master.legacyPackages.${pkgs.system}.go
+            flake-inputs.nixpkgs-master.legacyPackages.${pkgs.system}.golangci-lint
+            flake-inputs.nixpkgs-master.legacyPackages.${pkgs.system}.gopls
+            flake-inputs.nixpkgs-master.legacyPackages.${pkgs.system}.sqlc
             templ
             # javascript
             nodejs_latest
