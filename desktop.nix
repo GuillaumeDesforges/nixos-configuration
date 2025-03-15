@@ -115,7 +115,7 @@ in
     services.xserver.enable = true;
 
     # Enable the KDE Plasma Desktop Environment.
-    services.xserver.desktopManager.plasma5.enable = true;
+    services.xserver.desktopManager.plasma6.enable = true;
 
     # Install Docker
     virtualisation.docker.enable = true;
@@ -135,7 +135,7 @@ in
       enable = true;
       xdgOpenUsePortal = true;
       wlr.enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-kde ];
+      extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
     };
   };
 }

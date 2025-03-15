@@ -16,11 +16,12 @@ in
   options.gdforj.user = {
     enable = mkEnableOption "gdforj user";
     apps.desktop.enable = mkEnableOption "install desktop apps";
-    apps.work.enable = mkEnableOption "install work apps";
+    apps.dev.enable = mkEnableOption "install dev apps";
+    apps.gamedev.enable = mkEnableOption "install gamedev apps";
+    apps.gaming.enable = mkEnableOption "install gaming apps";
     apps.music.enable = mkEnableOption "install music apps";
     apps.video.enable = mkEnableOption "install video apps";
-    apps.gaming.enable = mkEnableOption "install gaming apps";
-    apps.gamedev.enable = mkEnableOption "install gamedev apps";
+    apps.work.enable = mkEnableOption "install work apps";
   };
 
   config = mkIf cfg.enable {
@@ -62,6 +63,13 @@ in
             nix-tree
             nix-output-monitor
             nixfmt-rfc-style
+          ]
+          ++ pkgs.lib.optionals cfg.apps.dev.enable [
+            # dev tools
+            gnumake
+            ripgrep
+            lazygit
+            aider-chat
 
             # data processing
             jq
@@ -69,43 +77,41 @@ in
             yq-go
             jless
 
-            # dev tools
-            gnumake
+            # cloud
             (pkgs.google-cloud-sdk.withExtraComponents [ pkgs.google-cloud-sdk.components.cloud_sql_proxy ])
             gh
-
-            # productivity
-            zk
           ]
           # desktop
-          ++ pkgs.lib.optionals cfg.apps.desktop.enable [
-            # fonts, to be used in terminal emulators
-            (nerdfonts.override { fonts = [ "Hack" ]; })
+          ++ pkgs.lib.optionals cfg.apps.desktop.enable (
+            [
+              # fonts, to be used in terminal emulators
+              nerd-fonts.hack
 
-            # web
-            google-chrome
+              # web
+              google-chrome
 
-            # social
-            slack
-            element-desktop
+              # office & productivity
+              # libreoffice
+              simple-scan
 
-            # office & productivity
-            libreoffice
-            simple-scan
-
-            # multimedia
-            vlc
-            gimp
-            stremio
-
-            # dev
-            vscode-fhs
-            code-cursor
-            aider-chat
-            dbeaver-bin
-            ripgrep
-            lazygit
-          ]
+              # multimedia
+              vlc
+              # FIXME: takes too long to build; custom opencv?
+              # gimp
+            ]
+            # work on desktop
+            ++ pkgs.lib.optionals cfg.apps.work.enable [
+              # social
+              slack
+            ]
+            # dev on desktop
+            ++ pkgs.lib.optionals cfg.apps.dev.enable [
+              # dev
+              vscode-fhs
+              code-cursor
+              dbeaver-bin
+            ]
+          )
           # work
           ++ pkgs.lib.optionals cfg.apps.work.enable [
             # ops

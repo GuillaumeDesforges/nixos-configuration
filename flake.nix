@@ -1,7 +1,9 @@
 {
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   inputs.nixpkgs-master.url = "github:nixos/nixpkgs/master";
+
   inputs.home-manager.url = "github:nix-community/home-manager/release-24.11";
+  inputs.home-manager-master.url = "github:nix-community/home-manager/master";
 
   outputs =
     { nixpkgs, ... }@flake-inputs:
@@ -47,6 +49,9 @@
 
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem {
+        nixpkgs = flake-inputs.nixpkgs-master;
+        home-manager = flake-inputs.home-manager-master;
+
         hostname = "tosaka";
         system = "x86_64-linux";
         config = (
@@ -55,9 +60,9 @@
             imports = [ ./hardwares/tosaka.nix ];
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
-            gdforj.user.apps.work.enable = true;
             gdforj.user.apps.gaming.enable = true;
-            gdforj.user.apps.music.enable = true;
+            gdforj.user.apps.work.enable = false;
+            gdforj.user.apps.music.enable = false;
           }
         );
       };
