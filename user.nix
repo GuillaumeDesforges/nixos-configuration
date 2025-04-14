@@ -47,7 +47,8 @@ in
         xdg.configFile."nixpkgs/config.nix".text = ''
           { allowUnfree = true; }
         '';
-        nixpkgs.config.allowUnfree = true;
+        # # overriden by useGlobalPkgs
+        # nixpkgs.config.allowUnfree = true;
 
         fonts.fontconfig.enable = true;
 
