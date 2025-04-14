@@ -1,9 +1,6 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-  inputs.nixpkgs-master.url = "github:nixos/nixpkgs/master";
-
-  inputs.home-manager.url = "github:nix-community/home-manager/release-24.11";
-  inputs.home-manager-master.url = "github:nix-community/home-manager/master";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/368ab95c5a5207fb8ee7a6fc6e832dd938a13b9e";
+  inputs.home-manager.url = "github:nix-community/home-manager/4e12151c9e014e2449e0beca2c0e9534b96a26b4";
 
   outputs =
     { nixpkgs, ... }@flake-inputs:
@@ -49,9 +46,6 @@
 
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem {
-        nixpkgs = flake-inputs.nixpkgs-master;
-        home-manager = flake-inputs.home-manager-master;
-
         hostname = "tosaka";
         system = "x86_64-linux";
         config = (
@@ -77,7 +71,7 @@
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
             # override keymap
-            services.xserver.layout = lib.mkForce "gb";
+            services.xserver.xkb.layout = lib.mkForce "gb";
           }
         );
       };
@@ -108,8 +102,8 @@
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
             gdforj.user.apps.work.enable = true;
-            # override keymap
-            services.xserver.layout = lib.mkForce "us";
+            # verride keymap documentation
+            services.xserver.xkb.layout = lib.mkForce "us";
           }
         );
       };

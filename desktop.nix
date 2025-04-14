@@ -65,10 +65,10 @@ in
     hardware.sane.extraBackends = [ pkgs.sane-airscan ];
     services.udev.packages = [ pkgs.sane-airscan ];
     services.avahi.enable = true;
-    services.avahi.nssmdns = true;
+    services.avahi.nssmdns4 = true;
 
     # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
@@ -115,7 +115,7 @@ in
     services.xserver.enable = true;
 
     # Enable the KDE Plasma Desktop Environment.
-    services.xserver.desktopManager.plasma6.enable = true;
+    services.desktopManager.plasma6.enable = true;
 
     # Install Docker
     virtualisation.docker.enable = true;
