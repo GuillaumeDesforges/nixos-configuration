@@ -220,6 +220,7 @@ in
             pkgs.nixd # nix
             pkgs.terraform-ls # hcl
             pkgs.gopls # golang
+            pkgs.golangci-lint-langserver # golang linters
             pkgs.zls # zig
             pkgs.vscode-langservers-extracted # HTML, CSS, JSON, ESLint
             pkgs.jdt-language-server # java
