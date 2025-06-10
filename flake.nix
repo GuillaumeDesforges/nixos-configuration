@@ -102,6 +102,7 @@
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
             gdforj.user.apps.work.enable = true;
+            gdforj.user.apps.dev.enable = true;
             # verride keymap documentation
             services.xserver.xkb.layout = lib.mkForce "us";
           }
