@@ -148,6 +148,8 @@ in
             # javascript
             nodejs_latest
             pnpm
+            # runtime deps
+            poppler_utils
           ]
           # music
           ++ pkgs.lib.optionals cfg.apps.music.enable [
