@@ -1,6 +1,4 @@
 final: prev: {
-  aider-chat = final.callPackage ./packages/aider-chat { };
-
   code-cursor = final.callPackage ./packages/code-cursor { };
 
   dbeaver-bin = prev.dbeaver-bin.override { override_xmx = "4096m"; };

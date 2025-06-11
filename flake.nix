@@ -1,6 +1,6 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/368ab95c5a5207fb8ee7a6fc6e832dd938a13b9e";
-  inputs.home-manager.url = "github:nix-community/home-manager/4e12151c9e014e2449e0beca2c0e9534b96a26b4";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+  inputs.home-manager.url = "github:nix-community/home-manager/release-25.05";
 
   outputs =
     { nixpkgs, ... }@flake-inputs:
