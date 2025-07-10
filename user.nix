@@ -205,25 +205,23 @@ in
           vimAlias = true;
           # add programs needed for plugins
           withNodeJs = true;
-          plugins = with pkgs.vimPlugins; [
-            lazy-nvim
-          ];
           extraPackages = [
-            # needed for lazyvim
-            pkgs.ripgrep
-            pkgs.lazygit
-            # needed to install some plugins
-            pkgs.gcc
-            pkgs.gnumake
-            # user LSPs (others must be provided per-project)
+            # rocks.nvim
+            pkgs.luajit
+            pkgs.luajitPackages.luarocks
+
+            # language servers
+            pkgs.gopls # golang
             pkgs.lua-language-server # lua
             pkgs.nixd # nix
-            pkgs.terraform-ls # hcl
-            pkgs.gopls # golang
             pkgs.golangci-lint-langserver # golang linters
-            pkgs.zls # zig
             pkgs.vscode-langservers-extracted # HTML, CSS, JSON, ESLint
+            pkgs.terraform-ls # hcl
+            pkgs.zls # zig
             pkgs.jdt-language-server # java
+
+						# required to open file from lazygit.nvim
+						pkgs.neovim-remote
           ];
 
           # lua config is handled manually by linking files from
