@@ -220,8 +220,8 @@ in
             pkgs.zls # zig
             pkgs.jdt-language-server # java
 
-						# required to open file from lazygit.nvim
-						pkgs.neovim-remote
+            # required to open file from lazygit.nvim
+            pkgs.neovim-remote
           ];
 
           # lua config is handled manually by linking files from
