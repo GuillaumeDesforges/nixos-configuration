@@ -92,7 +92,7 @@ in
               google-chrome
 
               # office & productivity
-              # libreoffice
+              libreoffice
               simple-scan
 
               # multimedia
