@@ -210,18 +210,33 @@ in
             pkgs.luajit
             pkgs.luajitPackages.luarocks
 
-            # language servers
-            pkgs.gopls # golang
-            pkgs.lua-language-server # lua
-            pkgs.nixd # nix
-            pkgs.golangci-lint-langserver # golang linters
-            pkgs.vscode-langservers-extracted # HTML, CSS, JSON, ESLint
-            pkgs.terraform-ls # hcl
-            pkgs.zls # zig
-            pkgs.jdt-language-server # java
-
             # required to open file from lazygit.nvim
             pkgs.neovim-remote
+
+            # golang
+            pkgs.gopls
+            pkgs.golangci-lint-langserver
+
+            # lua
+            pkgs.lua-language-server
+
+            # nix
+            pkgs.nixd
+
+            # HTML, CSS, JSON, ESLint
+            pkgs.vscode-langservers-extracted
+
+            # javascript/typescript
+            pkgs.prettierd
+
+            # hcl
+            pkgs.terraform-ls
+
+            # zig
+            pkgs.zls
+
+            # java
+            pkgs.jdt-language-server
           ];
 
           # lua config is handled manually by linking files from
