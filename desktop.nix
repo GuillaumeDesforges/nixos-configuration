@@ -60,6 +60,8 @@ in
       pkgs.hplip
       # Canon
       pkgs.cnijfilter2
+      # Canon
+      pkgs.epson-escpr
     ];
     hardware.sane.enable = true;
     hardware.sane.extraBackends = [ pkgs.sane-airscan ];
