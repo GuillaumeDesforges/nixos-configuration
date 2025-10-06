@@ -12,7 +12,6 @@
       mkNixosSystem =
         {
           nixpkgs ? flake-inputs.nixpkgs,
-          home-manager ? flake-inputs.home-manager,
           hostname,
           system,
           config,
