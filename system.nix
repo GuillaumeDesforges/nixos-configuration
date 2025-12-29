@@ -55,7 +55,10 @@ in
     };
 
     # use the Hack font
-    fonts.packages = [ pkgs.hack-font ];
+    fonts.packages = [
+      pkgs.nerd-fonts.hack
+    ];
+    console.font = "HackNerdFontMono";
 
     # default keymap
     services.xserver.xkb.layout = "fr";

@@ -85,9 +85,6 @@ in
           # desktop
           ++ pkgs.lib.optionals cfg.apps.desktop.enable (
             [
-              # fonts, to be used in terminal emulators
-              nerd-fonts.hack
-
               # web
               google-chrome
 
@@ -269,7 +266,7 @@ in
         programs.kitty = mkIf cfg.apps.desktop.enable {
           enable = true;
           font = {
-            name = "HackNerdMono";
+            name = "Hack/HackNerdFontMono";
             size = 18;
           };
           keybindings = {
