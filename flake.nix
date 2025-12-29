@@ -54,8 +54,9 @@
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
             gdforj.user.apps.gaming.enable = true;
-            gdforj.user.apps.work.enable = false;
-            gdforj.user.apps.music.enable = false;
+            gdforj.user.apps.work.enable = true;
+            gdforj.user.apps.dev.enable = true;
+            gdforj.user.apps.music.enable = true;
           }
         );
       };
