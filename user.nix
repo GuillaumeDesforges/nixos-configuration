@@ -146,7 +146,7 @@ in
             nodejs_latest
             pnpm
             # runtime deps
-            poppler_utils
+            poppler-utils
           ]
           # music
           ++ pkgs.lib.optionals cfg.apps.music.enable [
@@ -248,21 +248,25 @@ in
           enable = true;
           lfs.enable = true;
 
-          userEmail = "guillaume.desforges.pro@gmail.com";
-          userName = "Guillaume Desforges";
-
-          extraConfig = {
-            core = {
-              editor = "vim";
+          settings = {
+            user = {
+              email = "guillaume.desforges.pro@gmail.com";
+              name = "Guillaume Desforges";
             };
-            pull = {
-              ff = "only";
-            };
-          };
 
-          aliases = {
-            prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)''' refs/heads); do git branch -D $b; done";
-            graph = "log --graph --all --oneline";
+            aliases = {
+              prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)''' refs/heads); do git branch -D $b; done";
+              graph = "log --graph --all --oneline";
+            };
+
+            extraConfig = {
+              core = {
+                editor = "vim";
+              };
+              pull = {
+                ff = "only";
+              };
+            };
           };
         };
 
