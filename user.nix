@@ -70,7 +70,6 @@ in
             gnumake
             ripgrep
             lazygit
-            aider-chat
 
             # data processing
             jq
