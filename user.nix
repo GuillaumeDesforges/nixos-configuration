@@ -186,16 +186,15 @@ in
             # set prompt
             export PS1="\u@\h:\W\$ "
           '';
-          shellAliases =
-            {
-              "tmpdir" = "cd $(mktemp -d)";
-            }
-            // (mkIf cfg.apps.desktop.enable {
-              "google-chrome" = "google-chrome-stable";
-            })
-            // (mkIf cfg.apps.dev.enable {
-              "ppjson" = "jq -R -r '. as $line | try fromjson catch $line'";
-            });
+          shellAliases = {
+            "tmpdir" = "cd $(mktemp -d)";
+          }
+          // (mkIf cfg.apps.desktop.enable {
+            "google-chrome" = "google-chrome-stable";
+          })
+          // (mkIf cfg.apps.dev.enable {
+            "ppjson" = "jq -R -r '. as $line | try fromjson catch $line'";
+          });
         };
         programs.fzf.enable = true;
 
@@ -281,23 +280,22 @@ in
           };
         };
 
-        home.sessionVariables =
-          {
-            EDITOR = "vim";
-          }
-          // (
-            if cfg.apps.music.enable then
-              {
-                LV2_PATH = lib.strings.concatMapStringsSep ":" (p: "${p}/lib/lv2") [
-                  pkgs.lsp-plugins
-                  # pkgs.drumgizmo
-                  # pkgs.guitarix
-                  # pkgs.distrho # broken
-                ];
-              }
-            else
-              { }
-          );
+        home.sessionVariables = {
+          EDITOR = "vim";
+        }
+        // (
+          if cfg.apps.music.enable then
+            {
+              LV2_PATH = lib.strings.concatMapStringsSep ":" (p: "${p}/lib/lv2") [
+                pkgs.lsp-plugins
+                # pkgs.drumgizmo
+                # pkgs.guitarix
+                # pkgs.distrho # broken
+              ];
+            }
+          else
+            { }
+        );
       };
   };
 }
