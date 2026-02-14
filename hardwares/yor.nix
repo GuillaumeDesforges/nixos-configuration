@@ -56,4 +56,5 @@
   hardware.graphics.enable = true;
   virtualisation.docker.enableNvidia = true;
   hardware.graphics.enable32Bit = true;
+  nixpkgs.config.cudaSupport = true;
 }

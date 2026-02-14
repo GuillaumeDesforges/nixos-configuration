@@ -51,7 +51,7 @@ in
     # system-wide nixpkgs settings
     nixpkgs.config = {
       allowUnfree = true;
-      cudaSupport = true;
+      # nixpkgs.config.cudaSupport should be enabled per machine;
     };
 
     # use the Hack font
