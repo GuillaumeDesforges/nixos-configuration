@@ -2,6 +2,9 @@
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
   inputs.home-manager.url = "github:nix-community/home-manager/release-25.11";
 
+  inputs.claude-code.url = "github:sadjow/claude-code-nix";
+  inputs.claude-code.inputs.nixpkgs.follows = "nixpkgs";
+
   outputs =
     { nixpkgs, ... }@flake-inputs:
     let
@@ -25,6 +28,7 @@
             ./modules/system.nix
             ./modules/desktop.nix
             ./modules/user.nix
+            ./modules/claude.nix
             (
               { ... }:
               {
@@ -103,6 +107,7 @@
             gdforj.user.apps.desktop.enable = true;
             gdforj.user.apps.work.enable = true;
             gdforj.user.apps.dev.enable = true;
+            gdforj.claude.enable = true;
             # verride keymap documentation
             services.xserver.xkb.layout = lib.mkForce "us";
           }
