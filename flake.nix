@@ -22,9 +22,9 @@
             flake-inputs = flake-inputs;
           };
           modules = [
-            ./system.nix
-            ./desktop.nix
-            ./user.nix
+            ./modules/system.nix
+            ./modules/desktop.nix
+            ./modules/user.nix
             (
               { ... }:
               {
