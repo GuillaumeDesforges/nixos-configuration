@@ -60,6 +60,7 @@
             gdforj.user.apps.gaming.enable = true;
             gdforj.user.apps.work.enable = true;
             gdforj.user.apps.dev.enable = true;
+            gdforj.claude.enable = true;
             gdforj.user.apps.music.enable = true;
           }
         );
