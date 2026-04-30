@@ -21,6 +21,6 @@ in
 
   config = mkIf cfg.enable {
     nixpkgs.overlays = [ flake-inputs.claude-code.overlays.default ];
-    environment.systemPackages = [ pkgs.claude-code-bun ];
+    environment.systemPackages = [ pkgs.claude-code ];
   };
 }
