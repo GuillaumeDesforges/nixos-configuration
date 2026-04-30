@@ -104,8 +104,6 @@ in
             # dev on desktop
             ++ pkgs.lib.optionals cfg.apps.dev.enable [
               # dev
-              vscode-fhs
-              code-cursor
               dbeaver-bin
             ]
           )
