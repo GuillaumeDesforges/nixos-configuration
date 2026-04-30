@@ -116,19 +116,16 @@ in
             gnumake
             just
             mage
-            # devops
             pre-commit
-            # cloud
-            awscli2
-            hcp
-            heroku
             temporal-cli
             # infra
+            awscli2
             kubectl
             kubernetes-helm
             terraform
-            # secrets
-            sops
+            # security
+            trivy
+            ssm-session-manager-plugin
             # data
             flyway
             postgresql
