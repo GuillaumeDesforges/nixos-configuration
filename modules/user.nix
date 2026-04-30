@@ -266,7 +266,7 @@ in
         programs.kitty = mkIf cfg.apps.desktop.enable {
           enable = true;
           font = {
-            name = "Hack/HackNerdFontMono";
+            name = "Hack Nerd Font Mono";
             size = 18;
           };
           keybindings = {

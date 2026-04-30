@@ -35,7 +35,6 @@ in
     fonts.packages = [
       pkgs.nerd-fonts.hack
     ];
-    console.font = "HackNerdFontMono";
 
     # default keymap
     services.xserver.xkb.layout = "fr";
