@@ -5,40 +5,16 @@
   ...
 }:
 let
-  inherit (lib) mkOption mkIf;
-  cfg = config.gdforj;
+  inherit (lib) mkOption;
 in
 {
-  options.gdforj.nixpkgs.rev = mkOption {
-    default = "";
-    type = lib.types.str;
-  };
-
-  config.assertions = [
-    {
-      assertion = config.gdforj.nixpkgs.rev != "";
-      message = "Missing config `gdforj.nixpkgs.rev`";
-    }
-  ];
-
   config = {
     # don't edit
     system.stateVersion = "23.05";
 
     # Nix system configuration
     nix = {
-      # use the same <nixpkgs> flake/channel as NixOS
-      registry.nixpkgs.from = {
-        type = "indirect";
-        id = "nixpkgs";
-      };
-      registry.nixpkgs.to = {
-        type = "github";
-        owner = "nixos";
-        repo = "nixpkgs";
-        rev = config.gdforj.nixpkgs.rev;
-      };
-      # system-wide Nix settings
+      channel.enable = false;
       settings = {
         experimental-features = [
           "nix-command"
@@ -48,9 +24,10 @@ in
         flake-registry = "";
       };
     };
-    # system-wide nixpkgs settings
     nixpkgs.config = {
       allowUnfree = true;
+      flake.setNixPath = true;
+      flake.setFlakeRegistry = true;
       # nixpkgs.config.cudaSupport should be enabled per machine;
     };
 

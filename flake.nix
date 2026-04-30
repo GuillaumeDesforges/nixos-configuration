@@ -33,7 +33,6 @@
               { ... }:
               {
                 # shared config
-                gdforj.nixpkgs.rev = nixpkgs.sourceInfo.rev;
                 gdforj.user.enable = true;
                 nixpkgs.overlays = [ overlay ];
                 networking.hostName = hostname;
