@@ -123,6 +123,7 @@ in
             terraform
             # security
             trivy
+            gitleaks
             ssm-session-manager-plugin
             # data
             flyway
