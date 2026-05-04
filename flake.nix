@@ -44,33 +44,13 @@
       nixosConfigurations.tosaka = mkNixosSystem {
         hostname = "tosaka";
         system = "x86_64-linux";
-        config = (
-          { ... }:
-          {
-            imports = [ ./hardwares/tosaka.nix ];
-            gdforj.desktop.enable = true;
-            gdforj.user.apps.desktop.enable = true;
-            gdforj.user.apps.gaming.enable = true;
-            gdforj.user.apps.work.enable = true;
-            gdforj.user.apps.dev.enable = true;
-            gdforj.claude.enable = true;
-            gdforj.user.apps.music.enable = true;
-          }
-        );
+        config = ./hosts/tosaka;
       };
 
       nixosConfigurations.yor = mkNixosSystem {
         hostname = "yor";
         system = "x86_64-linux";
-        config = (
-          { ... }:
-          {
-            imports = [ ./hardwares/yor.nix ];
-            gdforj.desktop.enable = true;
-            gdforj.user.apps.desktop.enable = true;
-            gdforj.system.keyboardLayout = "gb";
-          }
-        );
+        config = ./hosts/yor;
       };
 
       # laptops
@@ -78,32 +58,13 @@
       nixosConfigurations.nazuna = mkNixosSystem {
         hostname = "nazuna";
         system = "x86_64-linux";
-        config = (
-          { ... }:
-          {
-            imports = [ ./hardwares/nazuna.nix ];
-            gdforj.desktop.enable = true;
-            gdforj.user.apps.desktop.enable = true;
-            gdforj.user.apps.work.enable = true;
-          }
-        );
+        config = ./hosts/nazuna;
       };
 
       nixosConfigurations.echidna = mkNixosSystem {
         hostname = "echidna";
         system = "x86_64-linux";
-        config = (
-          { ... }:
-          {
-            imports = [ ./hardwares/echidna.nix ];
-            gdforj.desktop.enable = true;
-            gdforj.user.apps.desktop.enable = true;
-            gdforj.user.apps.work.enable = true;
-            gdforj.user.apps.dev.enable = true;
-            gdforj.claude.enable = true;
-            gdforj.system.keyboardLayout = "us";
-          }
-        );
+        config = ./hosts/echidna;
       };
 
       legacyPackages.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
