@@ -4,6 +4,7 @@
     ./system.nix
     ./desktop.nix
     ./user.nix
+    ./apps
     ./claude.nix
   ];
 

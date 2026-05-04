@@ -1,286 +1,130 @@
 {
-  lib,
-  config,
   flake-inputs,
-  pkgs,
   ...
 }:
-
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.gdforj.user;
-in
 {
   imports = [ flake-inputs.home-manager.nixosModules.home-manager ];
 
-  options.gdforj.user = {
-    apps.desktop.enable = mkEnableOption "install desktop apps";
-    apps.dev.enable = mkEnableOption "install dev apps";
-    apps.gamedev.enable = mkEnableOption "install gamedev apps";
-    apps.gaming.enable = mkEnableOption "install gaming apps";
-    apps.music.enable = mkEnableOption "install music apps";
-    apps.video.enable = mkEnableOption "install video apps";
-    apps.work.enable = mkEnableOption "install work apps";
+  users.users.gdforj = {
+    isNormalUser = true;
+    extraGroups = [
+      "docker"
+      "lp"
+      "scanner"
+      "plugdev"
+      "wheel"
+    ];
+    initialPassword = "password";
   };
 
-  config = {
-    users.users.gdforj = {
-      isNormalUser = true;
-      extraGroups = [
-        "docker"
-        "lp"
-        "scanner"
-        "plugdev"
-        "wheel"
+  home-manager.useGlobalPkgs = true;
+  home-manager.users.gdforj =
+    { pkgs, ... }:
+    {
+      home.stateVersion = "22.11";
+      programs.home-manager.enable = true;
+
+      fonts.fontconfig.enable = true;
+
+      home.sessionPath = [ "$HOME/.gdforj/bin" ];
+      home.packages = with pkgs; [
+        # Nix utils
+        nixpkgs-review
+        nix-index
+        nix-tree
+        nix-output-monitor
+        nixfmt-rfc-style
       ];
-      initialPassword = "password";
-    };
 
-    home-manager.useGlobalPkgs = true;
-    home-manager.users.gdforj =
-      { pkgs, ... }:
-      {
-        home.stateVersion = "22.11";
-        programs.home-manager.enable = true;
-
-        fonts.fontconfig.enable = true;
-
-        home.sessionPath = [ "$HOME/.gdforj/bin" ];
-        home.packages =
-          with pkgs;
-          # common
-          [
-            # Nix utils
-            nixpkgs-review
-            nix-index
-            nix-tree
-            nix-output-monitor
-            nixfmt-rfc-style
-          ]
-          ++ pkgs.lib.optionals cfg.apps.dev.enable [
-            # dev tools
-            gnumake
-            ripgrep
-            lazygit
-
-            # data processing
-            jq
-            jc
-            yq-go
-            jless
-
-            # cloud
-            (pkgs.google-cloud-sdk.withExtraComponents [ pkgs.google-cloud-sdk.components.cloud_sql_proxy ])
-            gh
-          ]
-          # desktop
-          ++ pkgs.lib.optionals cfg.apps.desktop.enable (
-            [
-              # web
-              google-chrome
-
-              # office & productivity
-              libreoffice
-              simple-scan
-
-              # multimedia
-              vlc
-              # FIXME: takes too long to build; custom opencv?
-              # gimp
-            ]
-            # work on desktop
-            ++ pkgs.lib.optionals cfg.apps.work.enable [
-              # social
-              slack
-            ]
-            # dev on desktop
-            ++ pkgs.lib.optionals cfg.apps.dev.enable [
-              # dev
-              dbeaver-bin
-            ]
-          )
-          # work
-          ++ pkgs.lib.optionals cfg.apps.work.enable [
-            # ops
-            envsubst
-            gnumake
-            just
-            mage
-            pre-commit
-            temporal-cli
-            # infra
-            awscli2
-            kubectl
-            kubernetes-helm
-            terraform
-            # security
-            trivy
-            gitleaks
-            ssm-session-manager-plugin
-            # data
-            flyway
-            postgresql
-            # golang
-            air
-            delve
-            exhaustruct
-            go
-            golangci-lint
-            gopls
-            sqlc
-            templ
-            # javascript
-            nodejs_latest
-            pnpm
-            # runtime deps
-            poppler-utils
-          ]
-          # music
-          ++ pkgs.lib.optionals cfg.apps.music.enable [
-            alsa-utils
-            audacity
-            bitwig-studio5
-
-            # # OSS music
-            # guitarix
-            # ardour
-            # distrho
-          ]
-          # streaming/recording
-          ++ pkgs.lib.optionals cfg.apps.video.enable [
-            (wrapOBS {
-              plugins = [
-                # obs-studio-plugins.obs-backgroundremoval
-              ];
-            })
-          ]
-          # gaming
-          ++ pkgs.lib.optionals cfg.apps.gaming.enable [
-            steam
-            lutris
-            prismlauncher
-          ]
-          # gamedev
-          ++ pkgs.lib.optionals cfg.apps.gamedev.enable [ godot_4 ];
-
-        programs.bash = {
-          enable = true;
-          bashrcExtra = ''
-            # get history on new shell
-            shopt -s histappend
-            PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-          '';
-          initExtra = ''
-            # set prompt
-            export PS1="\u@\h:\W\$ "
-          '';
-          shellAliases = {
-            "tmpdir" = "cd $(mktemp -d)";
-          }
-          // lib.optionalAttrs cfg.apps.dev.enable {
-            "ppjson" = "jq -R -r '. as $line | try fromjson catch $line'";
-          };
+      programs.bash = {
+        enable = true;
+        bashrcExtra = ''
+          # get history on new shell
+          shopt -s histappend
+          PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+        '';
+        initExtra = ''
+          # set prompt
+          export PS1="\u@\h:\W\$ "
+        '';
+        shellAliases = {
+          "tmpdir" = "cd $(mktemp -d)";
         };
-        programs.fzf.enable = true;
-
-        programs.neovim = {
-          enable = true;
-          vimAlias = true;
-          # add programs needed for plugins
-          withNodeJs = true;
-          extraPackages = [
-            # rocks.nvim
-            pkgs.luajit
-            pkgs.luajitPackages.luarocks
-
-            # required to open file from lazygit.nvim
-            pkgs.neovim-remote
-
-            # golang
-            pkgs.gopls
-            pkgs.golangci-lint-langserver
-
-            # lua
-            pkgs.lua-language-server
-
-            # nix
-            pkgs.nixd
-
-            # HTML, CSS, JSON, ESLint
-            pkgs.vscode-langservers-extracted
-
-            # javascript/typescript
-            pkgs.prettierd
-
-            # hcl
-            pkgs.terraform-ls
-
-            # zig
-            pkgs.zls
-
-            # java
-            pkgs.jdt-language-server
-          ];
-
-          # lua config is handled manually by linking files from
-          # https://github.com/GuillaumeDesforges/dotfiles
-          # manually to ~/.config/neovim
-        };
-
-        programs.git = {
-          enable = true;
-          lfs.enable = true;
-
-          settings = {
-            user = {
-              email = "guillaume.desforges.pro@gmail.com";
-              name = "Guillaume Desforges";
-            };
-
-            aliases = {
-              prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)''' refs/heads); do git branch -D $b; done";
-              graph = "log --graph --all --oneline";
-            };
-
-            extraConfig = {
-              core = {
-                editor = "vim";
-              };
-              pull = {
-                ff = "only";
-              };
-            };
-          };
-        };
-
-        programs.kitty = mkIf cfg.apps.desktop.enable {
-          enable = true;
-          font = {
-            name = "Hack Nerd Font Mono";
-            size = 18;
-          };
-          keybindings = {
-            "ctrl+shift+enter" = "new_window_with_cwd";
-            "ctrl+shift+t" = "new_tab_with_cwd";
-          };
-        };
-
-        home.sessionVariables = {
-          EDITOR = "vim";
-        }
-        // (
-          if cfg.apps.music.enable then
-            {
-              LV2_PATH = lib.strings.concatMapStringsSep ":" (p: "${p}/lib/lv2") [
-                pkgs.lsp-plugins
-                # pkgs.drumgizmo
-                # pkgs.guitarix
-                # pkgs.distrho # broken
-              ];
-            }
-          else
-            { }
-        );
       };
-  };
+      programs.fzf.enable = true;
+
+      programs.neovim = {
+        enable = true;
+        vimAlias = true;
+        # add programs needed for plugins
+        withNodeJs = true;
+        extraPackages = [
+          # rocks.nvim
+          pkgs.luajit
+          pkgs.luajitPackages.luarocks
+
+          # required to open file from lazygit.nvim
+          pkgs.neovim-remote
+
+          # golang
+          pkgs.gopls
+          pkgs.golangci-lint-langserver
+
+          # lua
+          pkgs.lua-language-server
+
+          # nix
+          pkgs.nixd
+
+          # HTML, CSS, JSON, ESLint
+          pkgs.vscode-langservers-extracted
+
+          # javascript/typescript
+          pkgs.prettierd
+
+          # hcl
+          pkgs.terraform-ls
+
+          # zig
+          pkgs.zls
+
+          # java
+          pkgs.jdt-language-server
+        ];
+
+        # lua config is handled manually by linking files from
+        # https://github.com/GuillaumeDesforges/dotfiles
+        # manually to ~/.config/neovim
+      };
+
+      programs.git = {
+        enable = true;
+        lfs.enable = true;
+
+        settings = {
+          user = {
+            email = "guillaume.desforges.pro@gmail.com";
+            name = "Guillaume Desforges";
+          };
+
+          aliases = {
+            prune-branches = "!git fetch -p && for b in $(git for-each-ref --format='''%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)''' refs/heads); do git branch -D $b; done";
+            graph = "log --graph --all --oneline";
+          };
+
+          extraConfig = {
+            core = {
+              editor = "vim";
+            };
+            pull = {
+              ff = "only";
+            };
+          };
+        };
+      };
+
+      home.sessionVariables = {
+        EDITOR = "vim";
+      };
+    };
 }
