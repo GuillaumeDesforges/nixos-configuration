@@ -12,7 +12,7 @@ in
   options.gdforj.user.apps.video.enable = mkEnableOption "install video apps";
 
   config = mkIf cfg.enable {
-    home-manager.users.gdforj.home.packages = with pkgs; [
+    home-manager.users.${config.gdforj.user.name}.home.packages = with pkgs; [
       (wrapOBS {
         plugins = [
           # obs-studio-plugins.obs-backgroundremoval

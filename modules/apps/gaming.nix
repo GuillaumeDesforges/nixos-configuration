@@ -12,7 +12,7 @@ in
   options.gdforj.user.apps.gaming.enable = mkEnableOption "install gaming apps";
 
   config = mkIf cfg.enable {
-    home-manager.users.gdforj.home.packages = with pkgs; [
+    home-manager.users.${config.gdforj.user.name}.home.packages = with pkgs; [
       steam
       lutris
       prismlauncher

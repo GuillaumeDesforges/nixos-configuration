@@ -12,7 +12,7 @@ in
   options.gdforj.user.apps.dev.enable = mkEnableOption "install dev apps";
 
   config = mkIf cfg.enable {
-    home-manager.users.gdforj = {
+    home-manager.users.${config.gdforj.user.name} = {
       home.packages =
         with pkgs;
         [

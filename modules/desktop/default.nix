@@ -43,7 +43,7 @@ in
     # SDDM display manager with autologin
     services.displayManager.sddm.enable = true;
     services.displayManager.autoLogin.enable = true;
-    services.displayManager.autoLogin.user = "gdforj";
+    services.displayManager.autoLogin.user = config.gdforj.user.name;
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;

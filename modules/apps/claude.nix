@@ -15,6 +15,6 @@ in
 
   config = mkIf cfg.enable {
     nixpkgs.overlays = [ flake-inputs.claude-code.overlays.default ];
-    home-manager.users.gdforj.home.packages = [ pkgs.claude-code ];
+    home-manager.users.${config.gdforj.user.name}.home.packages = [ pkgs.claude-code ];
   };
 }

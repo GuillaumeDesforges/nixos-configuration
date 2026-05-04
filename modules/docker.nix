@@ -14,6 +14,6 @@ in
   config = mkIf cfg.enable {
     virtualisation.docker.enable = true;
     environment.systemPackages = [ pkgs.docker-compose ];
-    users.users.gdforj.extraGroups = [ "docker" ];
+    users.users.${config.gdforj.user.name}.extraGroups = [ "docker" ];
   };
 }
