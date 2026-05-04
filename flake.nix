@@ -1,6 +1,7 @@
 {
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
   inputs.home-manager.url = "github:nix-community/home-manager/release-25.11";
+  inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.claude-code.url = "github:sadjow/claude-code-nix";
   inputs.claude-code.inputs.nixpkgs.follows = "nixpkgs";
