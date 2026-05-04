@@ -21,10 +21,10 @@
     };
     nixpkgs.config = {
       allowUnfree = true;
-      flake.setNixPath = true;
-      flake.setFlakeRegistry = true;
       # nixpkgs.config.cudaSupport should be enabled per machine;
     };
+    nixpkgs.flake.setNixPath = true;
+    nixpkgs.flake.setFlakeRegistry = true;
 
     # use the Hack font
     fonts.packages = [
