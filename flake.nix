@@ -37,7 +37,7 @@
     in
     {
       # if you want to use the custom packages
-      overlay = overlay;
+      overlays.default = overlay;
 
       # desktops
       nixosConfigurations.tosaka = mkNixosSystem {
