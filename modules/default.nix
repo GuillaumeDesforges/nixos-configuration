@@ -1,4 +1,4 @@
-{ ... }:
+{ flake-inputs, ... }:
 {
   imports = [
     ./system.nix
@@ -9,5 +9,5 @@
 
   gdforj.user.enable = true;
 
-  nixpkgs.overlays = [ (import ../overlay.nix) ];
+  nixpkgs.overlays = [ flake-inputs.self.overlays.default ];
 }
