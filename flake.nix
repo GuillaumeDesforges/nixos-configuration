@@ -25,16 +25,10 @@
             flake-inputs = flake-inputs;
           };
           modules = [
-            ./modules/system.nix
-            ./modules/desktop.nix
-            ./modules/user.nix
-            ./modules/claude.nix
+            ./modules
             (
               { ... }:
               {
-                # shared config
-                gdforj.user.enable = true;
-                nixpkgs.overlays = [ overlay ];
                 networking.hostName = hostname;
               }
             )

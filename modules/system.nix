@@ -1,12 +1,7 @@
 {
-  lib,
-  config,
   pkgs,
   ...
 }:
-let
-  inherit (lib) mkOption;
-in
 {
   config = {
     # don't edit
