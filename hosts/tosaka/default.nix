@@ -8,6 +8,6 @@
   gdforj.user.apps.work.enable = true;
   gdforj.user.apps.dev.enable = true;
   gdforj.user.apps.music.enable = true;
-  gdforj.claude.enable = true;
+  gdforj.user.apps.claude.enable = true;
   gdforj.docker.enable = true;
 }

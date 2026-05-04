@@ -5,7 +5,6 @@
     ./desktop
     ./user.nix
     ./apps
-    ./claude.nix
     ./docker.nix
   ];
 
