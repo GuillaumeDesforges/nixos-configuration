@@ -44,12 +44,6 @@ in
         home.stateVersion = "22.11";
         programs.home-manager.enable = true;
 
-        xdg.configFile."nixpkgs/config.nix".text = ''
-          { allowUnfree = true; }
-        '';
-        # # overriden by useGlobalPkgs
-        # nixpkgs.config.allowUnfree = true;
-
         fonts.fontconfig.enable = true;
 
         home.sessionPath = [ "$HOME/.gdforj/bin" ];
