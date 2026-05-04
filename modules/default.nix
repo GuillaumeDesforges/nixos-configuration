@@ -2,7 +2,7 @@
 {
   imports = [
     ./system.nix
-    ./desktop.nix
+    ./desktop
     ./user.nix
     ./apps
     ./claude.nix
