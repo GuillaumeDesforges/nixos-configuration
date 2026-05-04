@@ -185,12 +185,9 @@ in
           shellAliases = {
             "tmpdir" = "cd $(mktemp -d)";
           }
-          // (mkIf cfg.apps.desktop.enable {
-            "google-chrome" = "google-chrome-stable";
-          })
-          // (mkIf cfg.apps.dev.enable {
+          // lib.optionalAttrs cfg.apps.dev.enable {
             "ppjson" = "jq -R -r '. as $line | try fromjson catch $line'";
-          });
+          };
         };
         programs.fzf.enable = true;
 
