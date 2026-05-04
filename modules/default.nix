@@ -7,7 +7,5 @@
     ./claude.nix
   ];
 
-  gdforj.user.enable = true;
-
   nixpkgs.overlays = [ flake-inputs.self.overlays.default ];
 }

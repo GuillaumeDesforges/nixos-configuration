@@ -14,7 +14,6 @@ in
   imports = [ flake-inputs.home-manager.nixosModules.home-manager ];
 
   options.gdforj.user = {
-    enable = mkEnableOption "gdforj user";
     apps.desktop.enable = mkEnableOption "install desktop apps";
     apps.dev.enable = mkEnableOption "install dev apps";
     apps.gamedev.enable = mkEnableOption "install gamedev apps";
@@ -24,7 +23,7 @@ in
     apps.work.enable = mkEnableOption "install work apps";
   };
 
-  config = mkIf cfg.enable {
+  config = {
     users.users.gdforj = {
       isNormalUser = true;
       extraGroups = [
