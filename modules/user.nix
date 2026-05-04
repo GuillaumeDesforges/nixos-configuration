@@ -33,7 +33,7 @@
         nix-index
         nix-tree
         nix-output-monitor
-        nixfmt-rfc-style
+        nixfmt
       ];
 
       programs.bash = {
