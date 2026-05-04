@@ -66,30 +66,11 @@
           # required to open file from lazygit.nvim
           pkgs.neovim-remote
 
-          # golang
-          pkgs.gopls
-          pkgs.golangci-lint-langserver
-
           # lua
           pkgs.lua-language-server
 
           # nix
           pkgs.nixd
-
-          # HTML, CSS, JSON, ESLint
-          pkgs.vscode-langservers-extracted
-
-          # javascript/typescript
-          pkgs.prettierd
-
-          # hcl
-          pkgs.terraform-ls
-
-          # zig
-          pkgs.zls
-
-          # java
-          pkgs.jdt-language-server
         ];
 
         # lua config is handled manually by linking files from
