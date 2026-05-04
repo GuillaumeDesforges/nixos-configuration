@@ -23,17 +23,6 @@ in
   config = mkIf cfg.enable {
     # enable networking
     networking.networkmanager.enable = true;
-    # # Enable WEP key
-    # # I hope I never have to use this, as it's not secure at all.
-    # nixpkgs.overlays = [
-    #   (self: super: {
-    #     wpa_supplicant = super.wpa_supplicant.overrideAttrs (oldAttrs: rec {
-    #       extraConfig = oldAttrs.extraConfig + ''
-    #         CONFIG_WEP=y
-    #       '';
-    #     });
-    #   })
-    # ];
 
     # Set your time zone.
     time.timeZone = "Europe/Paris";
