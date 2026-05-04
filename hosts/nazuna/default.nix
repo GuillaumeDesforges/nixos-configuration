@@ -5,4 +5,5 @@
   gdforj.desktop.enable = true;
   gdforj.user.apps.desktop.enable = true;
   gdforj.user.apps.work.enable = true;
+  gdforj.docker.enable = true;
 }

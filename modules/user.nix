@@ -8,7 +8,6 @@
   users.users.gdforj = {
     isNormalUser = true;
     extraGroups = [
-      "docker"
       "lp"
       "scanner"
       "plugdev"

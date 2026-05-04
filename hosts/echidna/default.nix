@@ -7,5 +7,6 @@
   gdforj.user.apps.work.enable = true;
   gdforj.user.apps.dev.enable = true;
   gdforj.claude.enable = true;
+  gdforj.docker.enable = true;
   gdforj.system.keyboardLayout = "us";
 }

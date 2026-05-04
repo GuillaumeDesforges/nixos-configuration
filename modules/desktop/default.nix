@@ -48,14 +48,9 @@ in
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-    # Docker (TODO: move out of desktop, this is dev tooling)
-    virtualisation.docker.enable = true;
-
     environment.systemPackages = [
       # Clipboard utility, necessary for nvim
       pkgs.xclip
-      # Docker
-      pkgs.docker-compose
     ];
 
     # Fix xdg-open
