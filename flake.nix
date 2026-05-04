@@ -14,7 +14,6 @@
       # helper function to make NixOS systems with common config
       mkNixosSystem =
         {
-          nixpkgs ? flake-inputs.nixpkgs,
           hostname,
           system,
           config,
