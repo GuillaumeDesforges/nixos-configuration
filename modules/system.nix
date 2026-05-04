@@ -1,8 +1,22 @@
 {
+  lib,
+  config,
   pkgs,
   ...
 }:
+let
+  inherit (lib) mkOption types;
+  cfg = config.gdforj.system;
+in
 {
+  options.gdforj.system = {
+    keyboardLayout = mkOption {
+      type = types.str;
+      default = "fr";
+      description = "X11/console keyboard layout (xkb).";
+    };
+  };
+
   config = {
     # don't edit
     system.stateVersion = "23.05";
@@ -15,7 +29,7 @@
           "nix-command"
           "flakes"
         ];
-        bash-prompt-prefix = "[] ";
+        bash-prompt-prefix = "[] ";
         flake-registry = "";
       };
     };
@@ -31,8 +45,7 @@
       pkgs.nerd-fonts.hack
     ];
 
-    # default keymap
-    services.xserver.xkb.layout = "fr";
+    services.xserver.xkb.layout = cfg.keyboardLayout;
     services.xserver.xkb.options = "caps:escape";
     console.useXkbConfig = true;
 

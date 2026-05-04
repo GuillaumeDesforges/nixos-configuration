@@ -63,13 +63,12 @@
         hostname = "yor";
         system = "x86_64-linux";
         config = (
-          { lib, ... }:
+          { ... }:
           {
             imports = [ ./hardwares/yor.nix ];
             gdforj.desktop.enable = true;
             gdforj.user.apps.desktop.enable = true;
-            # override keymap
-            services.xserver.xkb.layout = lib.mkForce "gb";
+            gdforj.system.keyboardLayout = "gb";
           }
         );
       };
@@ -94,7 +93,7 @@
         hostname = "echidna";
         system = "x86_64-linux";
         config = (
-          { lib, ... }:
+          { ... }:
           {
             imports = [ ./hardwares/echidna.nix ];
             gdforj.desktop.enable = true;
@@ -102,8 +101,7 @@
             gdforj.user.apps.work.enable = true;
             gdforj.user.apps.dev.enable = true;
             gdforj.claude.enable = true;
-            # override keymap
-            services.xserver.xkb.layout = lib.mkForce "us";
+            gdforj.system.keyboardLayout = "us";
           }
         );
       };
