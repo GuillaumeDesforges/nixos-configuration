@@ -52,7 +52,6 @@ in
           # common
           [
             # Nix utils
-            nixpkgs-fmt
             nixpkgs-review
             nix-index
             nix-tree
