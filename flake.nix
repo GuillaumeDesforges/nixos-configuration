@@ -102,7 +102,7 @@
             gdforj.user.apps.work.enable = true;
             gdforj.user.apps.dev.enable = true;
             gdforj.claude.enable = true;
-            # verride keymap documentation
+            # override keymap
             services.xserver.xkb.layout = lib.mkForce "us";
           }
         );
