@@ -83,6 +83,9 @@ in
 
             # nix
             pkgs.nixd
+
+            # copilot.lua
+            pkgs.copilot-language-server
           ];
 
           # lua config is handled manually by linking files from
