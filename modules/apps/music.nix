@@ -17,6 +17,7 @@ in
         alsa-utils
         audacity
         bitwig-studio5
+        musescore
 
         # # OSS music
         # guitarix
