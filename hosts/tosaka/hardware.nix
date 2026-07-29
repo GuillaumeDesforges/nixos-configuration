@@ -19,9 +19,9 @@
   hardware.nvidia.open = false;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
   warnings = [ "Reminder: NVIDIA driver had been set to beta: ${config.hardware.nvidia.package}" ];
+  hardware.nvidia-container-toolkit.enable = true;
   nixpkgs.config.cudaSupport = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  virtualisation.docker.enableNvidia = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f71dd744-1d6c-4e4d-a4e3-be0470d62ced";
