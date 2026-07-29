@@ -68,8 +68,11 @@ in
         programs.neovim = {
           enable = true;
           vimAlias = true;
+          sideloadInitLua = true;
           # add programs needed for plugins
           withNodeJs = true;
+          withRuby = false;
+          withPython3 = false;
           extraPackages = [
             # rocks.nvim
             pkgs.luajit
@@ -83,9 +86,6 @@ in
 
             # nix
             pkgs.nixd
-
-            # copilot.lua
-            pkgs.copilot-language-server
           ];
 
           # lua config is handled manually by linking files from
