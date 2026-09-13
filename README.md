@@ -22,6 +22,20 @@ All under `gdforj.*`; defined alongside the code they gate.
 sudo nixos-rebuild switch --flake .#<hostname>
 ```
 
+## Gaming on PRIME offload hosts (akame)
+
+Hosts with `hardware.nvidia.prime.offload.enable` (like akame) default to the Intel iGPU for all rendering. To run a Steam game on the Nvidia GPU, set this in the game's **Launch Options** (right-click → Properties):
+
+```
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only %command%
+```
+
+Or use the `nvidia-offload` wrapper (enabled via `offload.enableOffloadCmd = true` in `hardware.nix`) for non-Steam binaries:
+
+```sh
+nvidia-offload <binary>
+```
+
 ## Adding a host
 
 1. `nixos-generate-config --show-hardware-config > hosts/<name>/hardware.nix`
