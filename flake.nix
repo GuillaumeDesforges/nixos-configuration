@@ -61,6 +61,12 @@
         config = ./hosts/echidna;
       };
 
+      nixosConfigurations.akame = mkNixosSystem {
+        hostname = "akame";
+        system = "x86_64-linux";
+        config = ./hosts/akame;
+      };
+
       legacyPackages.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.extend overlay;
     };
 }
