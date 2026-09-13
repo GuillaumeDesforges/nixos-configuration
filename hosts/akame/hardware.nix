@@ -48,8 +48,9 @@
   # Hybrid graphics: Intel HD 530 (00:02.0) + Nvidia GTX 1060 Mobile (01:00.0), PRIME offload
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
   hardware.nvidia.open = false;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   hardware.nvidia.prime = {
     offload.enable = true;
     offload.enableOffloadCmd = true;
