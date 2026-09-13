@@ -47,12 +47,6 @@
         config = ./hosts/tosaka;
       };
 
-      nixosConfigurations.yor = mkNixosSystem {
-        hostname = "yor";
-        system = "x86_64-linux";
-        config = ./hosts/yor;
-      };
-
       # laptops
 
       nixosConfigurations.nazuna = mkNixosSystem {
